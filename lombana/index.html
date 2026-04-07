@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soluciones Académicas | Dr. Mauro Lombana Gómez</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0B1B3E; --navy-l:#162347; --navy-ll:#1E2F5A;
+  --gold:#C9A84C; --gold-l:#E2BF6A; --gold-d:#A07830;
+  --white:#FFFFFF; --off:#F4F1EA;
+  --g100:#F8F9FA; --g200:#E9ECEF; --g400:#CED4DA; --g600:#6C757D; --g800:#343A40;
+  --ok:#28A745; --err:#DC3545; --warn:#E8A000;
+  --r:8px; --shadow:0 4px 24px rgba(0,0,0,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;line-height:1.5}
+h1,h2,h3,h4{font-family:'Playfair Display',serif}
+
+/* SECTIONS */
+.sec{display:none;min-height:100vh}
+.sec.active{display:block}
+
+/* NAV */
+.topnav{background:rgba(11,27,62,0.97);border-bottom:2px solid var(--gold-d);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:999;backdrop-filter:blur(6px)}
+.topnav-logo{display:flex;align-items:center;gap:12px}
+.topnav-logo img{height:44px;object-fit:contain}
+.topnav-logo span{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);font-weight:600;line-height:1.2}
+.topnav-actions{display:flex;gap:10px;align-items:center}
+.nav-user{font-size:.85rem;color:var(--gold-l);margin-right:8px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--r);border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;transition:all .2s;text-decoration:none}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px);box-shadow:0 6px 18px rgba(201,168,76,0.35)}
+.btn-outline{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--navy)}
+.btn-danger{background:var(--err);color:#fff}
+.btn-danger:hover{background:#b02a37}
+.btn-ghost{background:rgba(255,255,255,0.08);color:var(--white);border:1px solid rgba(255,255,255,0.15)}
+.btn-ghost:hover{background:rgba(255,255,255,0.15)}
+.btn-sm{padding:6px 14px;font-size:.82rem}
+.btn-lg{padding:14px 32px;font-size:1.05rem}
+.btn-block{width:100%;justify-content:center}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* CARDS */
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:28px;backdrop-filter:blur(4px)}
+.card-white{background:#fff;color:var(--g800);border:none}
+.card-gold-border{border-color:var(--gold)}
+
+/* FORMS */
+.form-group{margin-bottom:18px}
+.form-label{display:block;margin-bottom:6px;font-size:.9rem;color:var(--gold-l);font-weight:600}
+.form-control{width:100%;padding:11px 14px;border-radius:var(--r);border:1.5px solid rgba(201,168,76,0.3);background:rgba(255,255,255,0.06);color:var(--white);font-family:'Source Sans 3',sans-serif;font-size:.95rem;transition:border-color .2s}
+.form-control:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.09)}
+.form-control option{color:var(--g800);background:#fff}
+select.form-control option{color:var(--g800)}
+.form-error{color:#ff6b6b;font-size:.82rem;margin-top:4px}
+.form-hint{color:var(--g600);font-size:.82rem;margin-top:4px}
+
+/* ALERTS */
+.alert{padding:12px 16px;border-radius:var(--r);margin-bottom:16px;font-size:.9rem;display:flex;align-items:center;gap:10px}
+.alert-ok{background:rgba(40,167,69,0.15);border:1px solid rgba(40,167,69,0.4);color:#7deb9a}
+.alert-err{background:rgba(220,53,69,0.15);border:1px solid rgba(220,53,69,0.4);color:#ff8a8a}
+.alert-warn{background:rgba(232,160,0,0.15);border:1px solid rgba(232,160,0,0.4);color:#ffd45e}
+.alert-info{background:rgba(23,162,184,0.12);border:1px solid rgba(23,162,184,0.35);color:#7fe0ef}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.badge-gold{background:rgba(201,168,76,0.2);color:var(--gold)}
+.badge-ok{background:rgba(40,167,69,0.2);color:#7deb9a}
+.badge-err{background:rgba(220,53,69,0.2);color:#ff8a8a}
+.badge-info{background:rgba(23,162,184,0.15);color:#7fe0ef}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);margin:24px 0}
+
+/* PAGE WRAPPER */
+.page-inner{max-width:900px;margin:0 auto;padding:40px 24px}
+.page-inner-wide{max-width:1200px;margin:0 auto;padding:32px 24px}
+
+/* ─── LANDING ─── */
+.landing-hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;background:radial-gradient(ellipse at 30% 20%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(22,35,71,0.8) 0%,transparent 60%)}
+.landing-logo{width:160px;margin-bottom:28px;filter:drop-shadow(0 4px 16px rgba(201,168,76,0.3))}
+.landing-title{font-size:clamp(2rem,5vw,3.2rem);color:var(--white);margin-bottom:8px;line-height:1.15}
+.landing-title span{color:var(--gold)}
+.landing-sub{font-size:1.1rem;color:var(--gold-l);margin-bottom:8px;letter-spacing:.5px}
+.landing-desc{max-width:600px;font-size:1rem;color:rgba(255,255,255,0.7);margin:0 auto 36px}
+.landing-cards{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:36px}
+.course-card{background:rgba(255,255,255,0.04);border:1.5px solid rgba(201,168,76,0.25);border-radius:14px;padding:22px 26px;min-width:200px;max-width:240px;flex:1;cursor:pointer;transition:all .25s;text-align:center}
+.course-card:hover{border-color:var(--gold);background:rgba(201,168,76,0.08);transform:translateY(-4px);box-shadow:0 8px 28px rgba(201,168,76,0.2)}
+.course-card .ci{font-size:2.2rem;margin-bottom:10px}
+.course-card h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);margin-bottom:6px}
+.course-card p{font-size:.83rem;color:rgba(255,255,255,0.6)}
+.landing-footer{color:rgba(255,255,255,0.35);font-size:.8rem;margin-top:24px}
+
+/* ─── AUTH PAGES ─── */
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 24px;background:radial-gradient(ellipse at top left,rgba(201,168,76,0.07),transparent 50%)}
+.auth-box{width:100%;max-width:480px}
+.auth-logo{text-align:center;margin-bottom:28px}
+.auth-logo img{height:70px;margin-bottom:12px}
+.auth-logo h2{font-size:1.5rem;color:var(--gold)}
+.auth-logo p{font-size:.9rem;color:rgba(255,255,255,0.55);margin-top:4px}
+.auth-tabs{display:flex;gap:0;margin-bottom:24px;border-radius:var(--r);overflow:hidden;border:1px solid rgba(201,168,76,0.25)}
+.auth-tab{flex:1;padding:11px;text-align:center;cursor:pointer;font-weight:600;font-size:.9rem;transition:all .2s;color:rgba(255,255,255,0.5)}
+.auth-tab.active{background:var(--gold);color:var(--navy)}
+
+/* ─── DASHBOARD ─── */
+.dash-header{background:linear-gradient(135deg,var(--navy-ll),var(--navy-l));border-bottom:2px solid var(--gold-d);padding:28px}
+.dash-welcome{font-size:1.1rem;color:var(--gold-l);margin-bottom:4px}
+.dash-title{font-size:2rem;color:var(--white)}
+.dash-subtitle{color:rgba(255,255,255,0.55);font-size:.9rem;margin-top:4px}
+.dash-tabs{display:flex;gap:0;border-bottom:2px solid rgba(201,168,76,0.2);padding:0 28px}
+.dash-tab{padding:14px 20px;cursor:pointer;font-weight:600;font-size:.9rem;color:rgba(255,255,255,0.5);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.dash-tab:hover{color:var(--gold-l)}
+.dash-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.dash-content{padding:28px}
+.tab-pane{display:none}.tab-pane.active{display:block}
+
+/* STAT CARDS */
+.stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:28px}
+.stat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:18px;text-align:center}
+.stat-card .sn{font-size:2rem;font-weight:700;color:var(--gold)}
+.stat-card .sl{font-size:.82rem;color:rgba(255,255,255,0.55);margin-top:2px}
+
+/* SIMULACRO CARDS */
+.sim-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:22px;margin-bottom:16px;display:flex;align-items:center;gap:18px}
+.sim-card-icon{width:52px;height:52px;background:rgba(201,168,76,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.sim-card-body{flex:1}
+.sim-card-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--white);margin-bottom:4px}
+.sim-card-meta{font-size:.82rem;color:rgba(255,255,255,0.5)}
+.sim-card-meta span{margin-right:14px}
+.sim-card-actions{display:flex;gap:8px;align-items:center;flex-shrink:0}
+
+/* VIDEO CARDS */
+.video-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:10px;overflow:hidden;margin-bottom:14px;display:flex;align-items:center;gap:0}
+.video-thumb{width:80px;height:60px;background:var(--navy-ll);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.video-body{padding:14px 18px;flex:1}
+.video-title{font-weight:600;color:var(--white);font-size:.95rem;margin-bottom:3px}
+.video-desc{font-size:.82rem;color:rgba(255,255,255,0.5)}
+
+/* ─── SIMULACRO EXAM ─── */
+.exam-header{background:var(--navy-ll);border-bottom:2px solid var(--gold-d);padding:16px 28px;position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-content:space-between}
+.exam-timer{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);font-weight:700;letter-spacing:2px}
+.exam-timer.warn{color:var(--warn)}
+.exam-timer.danger{color:var(--err);animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.exam-progress{font-size:.85rem;color:rgba(255,255,255,0.55)}
+.exam-body{max-width:820px;margin:0 auto;padding:28px 24px}
+
+/* SITUATION BOX */
+.sit-box{background:rgba(201,168,76,0.06);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:18px 22px;margin-bottom:28px}
+.sit-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:8px}
+.sit-text{font-size:.9rem;color:rgba(255,255,255,0.8);line-height:1.7}
+
+/* QUESTION */
+.question-block{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:22px;margin-bottom:18px;transition:border-color .2s}
+.question-block:has(input:checked){border-color:rgba(201,168,76,0.35)}
+.question-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:10px}
+.question-text{font-size:1rem;color:var(--white);margin-bottom:16px;line-height:1.6;font-weight:600}
+.option-label{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;cursor:pointer;transition:background .15s;margin-bottom:8px;border:1.5px solid transparent}
+.option-label:hover{background:rgba(255,255,255,0.06)}
+.option-label input[type=radio]{accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;margin-top:2px}
+.option-label.selected{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.35)}
+.option-label.correct-ans{background:rgba(40,167,69,0.12);border-color:rgba(40,167,69,0.5)!important}
+.option-label.wrong-ans{background:rgba(220,53,69,0.12);border-color:rgba(220,53,69,0.5)!important}
+.option-key{font-weight:700;color:var(--gold);min-width:22px;flex-shrink:0;font-size:.9rem}
+.option-text{font-size:.93rem;color:rgba(255,255,255,0.85);line-height:1.5}
+
+/* RESULTS */
+.result-hero{text-align:center;padding:40px 24px 28px}
+.score-circle{width:160px;height:160px;border-radius:50%;border:6px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px;background:rgba(201,168,76,0.08)}
+.score-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--gold)}
+.score-den{font-size:.85rem;color:rgba(255,255,255,0.5)}
+.level-badge{display:inline-block;padding:6px 20px;border-radius:99px;font-size:1rem;font-weight:700;margin-bottom:12px}
+.level-superior{background:rgba(40,167,69,0.2);color:#7deb9a;border:1px solid rgba(40,167,69,0.5)}
+.level-alto{background:rgba(23,162,184,0.2);color:#7fe0ef;border:1px solid rgba(23,162,184,0.5)}
+.level-basico{background:rgba(232,160,0,0.2);color:#ffd45e;border:1px solid rgba(232,160,0,0.5)}
+.level-bajo{background:rgba(220,53,69,0.2);color:#ff8a8a;border:1px solid rgba(220,53,69,0.5)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:500px;margin:0 auto 28px}
+.rs-item{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:16px;text-align:center}
+.rs-num{font-size:1.8rem;font-weight:700}
+.rs-num.ok{color:#7deb9a}.rs-num.err{color:#ff8a8a}.rs-num.info{color:var(--gold)}
+.rs-lbl{font-size:.78rem;color:rgba(255,255,255,0.5)}
+
+/* PROGRESS BAR */
+.prog-bar-wrap{background:rgba(255,255,255,0.08);border-radius:99px;height:10px;overflow:hidden;margin:8px 0}
+.prog-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold-d),var(--gold-l));transition:width 1s ease}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead th{padding:12px 14px;text-align:left;font-weight:700;color:var(--gold);border-bottom:1px solid rgba(201,168,76,0.3);white-space:nowrap}
+tbody td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:middle}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+
+/* ADMIN */
+.admin-sidebar{width:230px;background:var(--navy-ll);border-right:1px solid rgba(201,168,76,0.2);min-height:calc(100vh - 60px);flex-shrink:0}
+.admin-layout{display:flex}
+.admin-main{flex:1;padding:28px;overflow-y:auto}
+.admin-nav-item{padding:13px 22px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,0.6);transition:all .2s;border-left:3px solid transparent}
+.admin-nav-item:hover{background:rgba(201,168,76,0.06);color:var(--white)}
+.admin-nav-item.active{background:rgba(201,168,76,0.1);color:var(--gold);border-left-color:var(--gold)}
+.admin-nav-item .icon{font-size:1.1rem;width:22px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
+.modal-box{background:var(--navy-l);border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:32px;max-width:500px;width:100%;max-height:85vh;overflow-y:auto}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);margin-bottom:20px}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 24px;color:rgba(255,255,255,0.35)}
+.empty-state .ei{font-size:3rem;margin-bottom:12px}
+.empty-state p{font-size:.95rem}
+
+/* UTIL */
+.text-gold{color:var(--gold)}
+.text-muted{color:rgba(255,255,255,0.45)}
+.text-ok{color:#7deb9a}
+.text-err{color:#ff8a8a}
+.mt-1{margin-top:8px}.mt-2{margin-top:16px}.mt-3{margin-top:24px}.mt-4{margin-top:32px}
+.mb-1{margin-bottom:8px}.mb-2{margin-bottom:16px}.mb-3{margin-bottom:24px}
+.flex{display:flex}.flex-center{align-items:center}.gap-2{gap:12px}.gap-3{gap:20px}
+.justify-between{justify-content:space-between}
+.hidden{display:none!important}
+.loading{opacity:.6;pointer-events:none}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:rgba(255,255,255,0.03)}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.4);border-radius:3px}
+
+/* ANSWER REVIEW */
+.review-sit{margin-bottom:30px}
+.review-sit-title{font-size:.85rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(201,168,76,0.2)}
+.review-q{display:flex;gap:14px;padding:12px;border-radius:8px;margin-bottom:8px;background:rgba(255,255,255,0.03)}
+.review-qnum{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0}
+.review-qnum.ok{background:rgba(40,167,69,0.2);color:#7deb9a}
+.review-qnum.err{background:rgba(220,53,69,0.2);color:#ff8a8a}
+.review-qnum.skip{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4)}
+.review-qtext{font-size:.88rem;color:rgba(255,255,255,0.75);flex:1}
+.review-ans{font-size:.8rem;margin-top:4px}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LANDING ══════════ -->
+<section id="sec-landing" class="sec active">
+<div class="landing-hero">
+  <img src="./logolombana.png" class="landing-logo" alt="Soluciones Académicas" onerror="this.style.display='none'">
+  <h1 class="landing-title"><span>Plataforma</span> de Preparación<br>para Pruebas del Estado</h1>
+  <p class="landing-sub">Dr. Mauro Lombana Gómez · Soluciones Académicas</p>
+  <p class="landing-desc">Prepárate para el Concurso Docente 2026, Concurso de Ascenso y Pre-ICFES con simulacros, tutorías y seguimiento personalizado de tu rendimiento.</p>
+  <div class="landing-cards">
+    <div class="course-card" onclick="goRegister('concurso-docente')">
+      <div class="ci">🎓</div>
+      <h3>Concurso Docente 2026</h3>
+      <p>Ingreso al servicio educativo estatal</p>
+    </div>
+    <div class="course-card" onclick="goRegister('ascenso')">
+      <div class="ci">📈</div>
+      <h3>Concurso de Ascenso</h3>
+      <p>Categorías y grados del escalafón</p>
+    </div>
+    <div class="course-card" onclick="goRegister('preicfes')">
+      <div class="ci">📚</div>
+      <h3>Pre-ICFES</h3>
+      <p>Saber 11 para estudiantes grado 11</p>
+    </div>
+  </div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+    <button class="btn btn-gold btn-lg" onclick="showSec('sec-login')">Iniciar Sesión</button>
+    <button class="btn btn-outline btn-lg" onclick="showSec('sec-register')">Registrarse</button>
+    <button class="btn btn-ghost" onclick="showSec('sec-admin-login')" style="font-size:.82rem">⚙ Administrador</button>
+  </div>
+  <p class="landing-footer">© 2026 Soluciones Académicas · Dr. Mauro Lombana Gómez · Todos los derechos reservados</p>
+</div>
+</section>
+
+<!-- ══════════ REGISTER ══════════ -->
+<section id="sec-register" class="sec">
+<div class="auth-wrap">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <img src="./logolombana.png" alt="Logo" onerror="this.style.display='none'">
+      <h2>Crear Cuenta</h2>
+      <p>Regístrate para acceder a la plataforma</p>
+    </div>
+    <div class="card card-gold-border">
+      <div id="reg-alert"></div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Nombre Completo *</label>
+          <input id="reg-name" class="form-control" type="text" placeholder="Tu nombre completo">
+        </div>
+        <div class="form-group">
+          <label class="form-label">N° de Documento *</label>
+          <input id="reg-doc" class="form-control" type="text" placeholder="Sin puntos ni espacios">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Correo Electrónico *</label>
+          <input id="reg-email" class="form-control" type="email" placeholder="tucorreo@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Celular *</label>
+          <input id="reg-phone" class="form-control" type="tel" placeholder="3XX XXXXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Curso de Preparación *</label>
+        <select id="reg-course" class="form-control">
+          <option value="">— Selecciona tu curso —</option>
+          <option value="concurso-docente">Concurso Docente de Ingreso 2026</option>
+          <option value="ascenso">Concurso de Ascenso Docente</option>
+          <option value="preicfes">Pre-ICFES (Saber 11)</option>
+        </select>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Contraseña *</label>
+          <input id="reg-pass" class="form-control" type="password" placeholder="Mínimo 6 caracteres">
+          <p class="form-hint">Tu usuario será tu N° de documento</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirmar Contraseña *</label>
+          <input id="reg-pass2" class="form-control" type="password" placeholder="Repite la contraseña">
+        </div>
+      </div>
+      <button class="btn btn-gold btn-block mt-2" onclick="doRegister()">Crear Mi Cuenta →</button>
+      <div class="divider"></div>
+      <p style="text-align:center;font-size:.88rem;color:rgba(255,255,255,0.55)">¿Ya tienes cuenta? <a href="#" onclick="showSec('sec-login')" style="color:var(--gold)">Inicia sesión</a> · <a href="#" onclick="showSec('sec-landing')" style="color:rgba(255,255,255,0.4)">Volver</a></p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ LOGIN ══════════ -->
+<section id="sec-login" class="sec">
+<div class="auth-wrap">
+  <div class="auth-box" style="max-width:420px">
+    <div class="auth-logo">
+      <img src="./logolombana.png" alt="Logo" onerror="this.style.display='none'">
+      <h2>Iniciar Sesión</h2>
+      <p>Ingresa con tu documento y contraseña</p>
+    </div>
+    <div class="card card-gold-border">
+      <div id="login-alert"></div>
+      <div class="form-group">
+        <label class="form-label">N° de Documento (Usuario)</label>
+        <input id="login-doc" class="form-control" type="text" placeholder="Tu número de documento">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contraseña</label>
+        <input id="login-pass" class="form-control" type="password" placeholder="Tu contraseña" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn btn-gold btn-block mt-2" onclick="doLogin()">Entrar →</button>
+      <div class="divider"></div>
+      <p style="text-align:center;font-size:.88rem;color:rgba(255,255,255,0.55)">¿No tienes cuenta? <a href="#" onclick="showSec('sec-register')" style="color:var(--gold)">Regístrate gratis</a> · <a href="#" onclick="showSec('sec-landing')" style="color:rgba(255,255,255,0.4)">Volver</a></p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ STUDENT DASHBOARD ══════════ -->
+<section id="sec-dashboard" class="sec">
+<nav class="topnav">
+  <div class="topnav-logo">
+    <img src="./logolombana.png" alt="Logo" onerror="this.style.display='none'">
+    <span>Soluciones<br>Académicas</span>
+  </div>
+  <div class="topnav-actions">
+    <span class="nav-user" id="dash-nav-user"></span>
+    <button class="btn btn-outline btn-sm" onclick="doLogout()">Salir</button>
+  </div>
+</nav>
+<div class="dash-header">
+  <p class="dash-welcome" id="dash-welcome">Bienvenido/a</p>
+  <h1 class="dash-title" id="dash-title">Panel de Estudio</h1>
+  <p class="dash-subtitle" id="dash-subtitle"></p>
+</div>
+<div class="dash-tabs">
+  <div class="dash-tab active" onclick="switchDashTab('simulacros',this)">📝 Simulacros</div>
+  <div class="dash-tab" onclick="switchDashTab('videos',this)">🎬 Videos</div>
+  <div class="dash-tab" onclick="switchDashTab('rendimiento',this)">📊 Mi Rendimiento</div>
+</div>
+<div class="dash-content">
+  <!-- Simulacros -->
+  <div id="dash-tab-simulacros" class="tab-pane active">
+    <div class="stat-cards" id="dash-stats"></div>
+    <h3 class="text-gold mb-2" style="font-size:1.1rem">Simulacros Disponibles</h3>
+    <div id="dash-simulacros-list"></div>
+  </div>
+  <!-- Videos -->
+  <div id="dash-tab-videos" class="tab-pane">
+    <h3 class="text-gold mb-2" style="font-size:1.1rem">Videos de Tutoría</h3>
+    <div id="dash-videos-list"></div>
+  </div>
+  <!-- Rendimiento -->
+  <div id="dash-tab-rendimiento" class="tab-pane">
+    <h3 class="text-gold mb-2" style="font-size:1.1rem">Mi Desempeño Académico</h3>
+    <div id="dash-rendimiento-content"></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ SIMULACRO INTRO ══════════ -->
+<section id="sec-sim-intro" class="sec">
+<div class="page-inner">
+  <button class="btn btn-ghost btn-sm mb-3" onclick="showSec('sec-dashboard');loadDashboard()">← Volver al Panel</button>
+  <div class="card card-gold-border" style="max-width:620px;margin:0 auto">
+    <div style="text-align:center;padding:20px 0 28px">
+      <div style="font-size:3rem;margin-bottom:14px">📋</div>
+      <h2 id="sim-intro-title" style="font-size:1.6rem;margin-bottom:8px;color:var(--gold)"></h2>
+      <p id="sim-intro-course" class="text-muted mb-3"></p>
+    </div>
+    <div class="grid-2 mb-3">
+      <div class="stat-card"><div class="sn" id="sim-intro-q">46</div><div class="sl">Preguntas</div></div>
+      <div class="stat-card"><div class="sn" id="sim-intro-t">100 min</div><div class="sl">Tiempo disponible</div></div>
+    </div>
+    <div class="alert alert-warn">
+      <span>⚠</span>
+      <span>Una vez iniciado, el tiempo corre sin pausa. Al terminar el tiempo, el simulacro se enviará automáticamente.</span>
+    </div>
+    <div class="alert alert-info" style="margin-top:10px">
+      <span>ℹ</span>
+      <span>Puedes navegar entre preguntas libremente. Responde todas antes de enviar. La escala de calificación es de 0 a 100 (MEN/CNSC).</span>
+    </div>
+    <div id="sim-intro-prev" class="mt-2 mb-2"></div>
+    <button class="btn btn-gold btn-block btn-lg mt-3" onclick="startExam()" id="btn-start-exam">🚀 Iniciar Simulacro</button>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ SIMULACRO EXAM ══════════ -->
+<section id="sec-exam" class="sec">
+<div class="exam-header">
+  <div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,0.5);margin-bottom:2px">SIMULACRO EN CURSO</div>
+    <div id="exam-title" style="font-weight:700;color:var(--white);font-size:.95rem"></div>
+  </div>
+  <div style="text-align:center">
+    <div style="font-size:.7rem;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase">Tiempo Restante</div>
+    <div class="exam-timer" id="exam-timer">1:40:00</div>
+  </div>
+  <div style="text-align:right">
+    <div id="exam-answered" class="exam-progress">0 / 46 respondidas</div>
+    <button class="btn btn-gold btn-sm mt-1" onclick="confirmSubmit()" id="btn-submit-exam">Entregar ✓</button>
+  </div>
+</div>
+<div class="exam-body" id="exam-body"></div>
+</section>
+
+<!-- ══════════ RESULTS ══════════ -->
+<section id="sec-results" class="sec">
+<div class="page-inner">
+  <div class="result-hero">
+    <h2 style="font-size:1.2rem;color:rgba(255,255,255,0.55);margin-bottom:20px">Resultados del Simulacro</h2>
+    <div class="score-circle">
+      <div class="score-num" id="res-score"></div>
+      <div class="score-den">/100</div>
+    </div>
+    <div id="res-level" class="level-badge"></div>
+    <p id="res-sim-name" style="color:rgba(255,255,255,0.55);font-size:.9rem;margin-top:8px"></p>
+    <div class="result-stats mt-3">
+      <div class="rs-item"><div class="rs-num ok" id="res-correct"></div><div class="rs-lbl">Correctas</div></div>
+      <div class="rs-item"><div class="rs-num err" id="res-wrong"></div><div class="rs-lbl">Incorrectas</div></div>
+      <div class="rs-item"><div class="rs-num info" id="res-skip"></div><div class="rs-lbl">Sin responder</div></div>
+    </div>
+    <div id="res-weaknesses" class="mt-3" style="max-width:600px;margin:24px auto 0;text-align:left"></div>
+  </div>
+  <div class="divider"></div>
+  <h3 class="text-gold mb-3" style="font-size:1.1rem">Revisión de Respuestas</h3>
+  <div id="res-review"></div>
+  <div class="flex gap-2 mt-4" style="justify-content:center;flex-wrap:wrap">
+    <button class="btn btn-gold" onclick="showSec('sec-dashboard');loadDashboard()">Ir al Panel →</button>
+    <button class="btn btn-ghost" onclick="showSec('sec-sim-intro');loadSimIntro(currentSimId)">Volver al Simulacro</button>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ADMIN LOGIN ══════════ -->
+<section id="sec-admin-login" class="sec">
+<div class="auth-wrap">
+  <div class="auth-box" style="max-width:400px">
+    <div class="auth-logo">
+      <img src="./logolombana.png" alt="Logo" onerror="this.style.display='none'">
+      <h2>Administrador</h2>
+      <p>Acceso restringido al personal autorizado</p>
+    </div>
+    <div class="card card-gold-border">
+      <div id="admin-login-alert"></div>
+      <div class="form-group">
+        <label class="form-label">Usuario Administrador</label>
+        <input id="adm-user" class="form-control" type="text" placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contraseña</label>
+        <input id="adm-pass" class="form-control" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()">
+      </div>
+      <button class="btn btn-gold btn-block mt-2" onclick="doAdminLogin()">Ingresar al Panel →</button>
+      <div class="divider"></div>
+      <p style="text-align:center;font-size:.85rem"><a href="#" onclick="showSec('sec-landing')" style="color:rgba(255,255,255,0.4)">← Volver al inicio</a></p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ADMIN DASHBOARD ══════════ -->
+<section id="sec-admin" class="sec">
+<nav class="topnav">
+  <div class="topnav-logo">
+    <img src="./logolombana.png" alt="Logo" onerror="this.style.display='none'">
+    <span>Admin · Soluciones<br>Académicas</span>
+  </div>
+  <div class="topnav-actions">
+    <span class="badge badge-gold">ADMINISTRADOR</span>
+    <button class="btn btn-outline btn-sm" onclick="doAdminLogout()">Salir</button>
+  </div>
+</nav>
+<div class="admin-layout">
+  <div class="admin-sidebar">
+    <div style="padding:20px 22px 12px;color:rgba(255,255,255,0.35);font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase">Menú</div>
+    <div class="admin-nav-item active" onclick="switchAdminTab('stats',this)"><span class="icon">📊</span> Estadísticas</div>
+    <div class="admin-nav-item" onclick="switchAdminTab('users',this)"><span class="icon">👥</span> Usuarios</div>
+    <div class="admin-nav-item" onclick="switchAdminTab('simulacros',this)"><span class="icon">📝</span> Simulacros</div>
+    <div class="admin-nav-item" onclick="switchAdminTab('videos',this)"><span class="icon">🎬</span> Videos</div>
+    <div class="admin-nav-item" onclick="switchAdminTab('rendimiento',this)"><span class="icon">📈</span> Rendimiento</div>
+    <div class="admin-nav-item" onclick="switchAdminTab('config',this)"><span class="icon">⚙</span> Configuración</div>
+  </div>
+  <div class="admin-main">
+    <!-- Stats -->
+    <div id="adm-tab-stats" class="tab-pane active">
+      <h2 class="text-gold mb-3">Panel de Control</h2>
+      <div class="stat-cards mb-3" id="adm-stats-cards"></div>
+      <div class="grid-2"><div id="adm-recent-users" class="card"></div><div id="adm-recent-results" class="card"></div></div>
+    </div>
+    <!-- Users -->
+    <div id="adm-tab-users" class="tab-pane">
+      <div class="flex justify-between flex-center mb-3">
+        <h2 class="text-gold">Gestión de Usuarios</h2>
+        <button class="btn btn-gold btn-sm" onclick="exportUsers()">⬇ Exportar CSV</button>
+      </div>
+      <div class="card" style="margin-bottom:14px;padding:14px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input id="adm-search" class="form-control" style="max-width:260px" type="text" placeholder="🔍 Buscar por nombre o doc..." oninput="renderUsersTable()">
+          <select id="adm-filter-course" class="form-control" style="max-width:220px" onchange="renderUsersTable()">
+            <option value="">Todos los cursos</option>
+            <option value="concurso-docente">Concurso Docente</option>
+            <option value="ascenso">Ascenso</option>
+            <option value="preicfes">Pre-ICFES</option>
+          </select>
+        </div>
+      </div>
+      <div class="card table-wrap"><table id="adm-users-table"><thead><tr><th>Doc.</th><th>Nombre</th><th>Correo</th><th>Celular</th><th>Curso</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adm-users-tbody"></tbody></table></div>
+    </div>
+    <!-- Simulacros -->
+    <div id="adm-tab-simulacros" class="tab-pane">
+      <div class="flex justify-between flex-center mb-3">
+        <h2 class="text-gold">Gestión de Simulacros</h2>
+        <button class="btn btn-gold btn-sm" onclick="openAddSimModal()">+ Agregar Simulacro</button>
+      </div>
+      <div id="adm-sims-list"></div>
+    </div>
+    <!-- Videos -->
+    <div id="adm-tab-videos" class="tab-pane">
+      <div class="flex justify-between flex-center mb-3">
+        <h2 class="text-gold">Gestión de Videos</h2>
+        <button class="btn btn-gold btn-sm" onclick="openAddVideoModal()">+ Agregar Video</button>
+      </div>
+      <div id="adm-videos-list"></div>
+    </div>
+    <!-- Rendimiento -->
+    <div id="adm-tab-rendimiento" class="tab-pane">
+      <h2 class="text-gold mb-3">Rendimiento por Estudiante</h2>
+      <div class="card mb-3" style="padding:14px">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <select id="adm-perf-user" class="form-control" style="max-width:300px" onchange="loadAdminPerf()">
+            <option value="">— Selecciona un estudiante —</option>
+          </select>
+        </div>
+      </div>
+      <div id="adm-perf-content"></div>
+    </div>
+    <!-- Config -->
+    <div id="adm-tab-config" class="tab-pane">
+      <h2 class="text-gold mb-3">Configuración</h2>
+      <div class="card" style="max-width:440px">
+        <h3 class="mb-2" style="font-size:1rem">Cambiar Contraseña Admin</h3>
+        <div class="form-group"><label class="form-label">Nueva Contraseña</label><input id="cfg-newpass" class="form-control" type="password" placeholder="Nueva contraseña"></div>
+        <div class="form-group"><label class="form-label">Confirmar</label><input id="cfg-newpass2" class="form-control" type="password" placeholder="Confirmar contraseña"></div>
+        <button class="btn btn-gold" onclick="changeAdminPass()">Actualizar Contraseña</button>
+        <div id="cfg-alert" class="mt-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ MODAL ══════════ -->
+<div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- CONFIRM DIALOG -->
+<div id="confirm-overlay" class="modal-overlay hidden">
+  <div class="modal-box" style="max-width:380px;text-align:center">
+    <div style="font-size:3rem;margin-bottom:14px">⏱</div>
+    <h3 class="modal-title" style="text-align:center" id="confirm-title">¿Entregar simulacro?</h3>
+    <p id="confirm-msg" style="color:rgba(255,255,255,0.65);margin-bottom:24px;font-size:.95rem"></p>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Seguir respondiendo</button>
+      <button class="btn btn-gold" onclick="submitExam()">Sí, entregar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  DATA LAYER
+// ═══════════════════════════════════════════════════
+const DB = {
+  get(k){try{return JSON.parse(localStorage.getItem('slom_'+k))||null}catch{return null}},
+  set(k,v){localStorage.setItem('slom_'+k,JSON.stringify(v))},
+  del(k){localStorage.removeItem('slom_'+k)}
+};
+function users(){return DB.get('users')||[]}
+function setUsers(u){DB.set('users',u)}
+function results(){return DB.get('results')||[]}
+function setResults(r){DB.set('results',r)}
+function simulacros(){return DB.get('simulacros')||[]}
+function setSimulacros(s){DB.set('simulacros',s)}
+function videos(){return DB.get('videos')||[]}
+function setVideos(v){DB.set('videos',v)}
+function session(){return DB.get('session')}
+function setSession(s){DB.set('session',s)}
+function adminCfg(){return DB.get('admin')||{username:'admin',password:'lombana2026'}}
+
+// Init admin config if not set
+if(!DB.get('admin')) DB.set('admin',{username:'admin',password:'lombana2026'});
+
+// ═══════════════════════════════════════════════════
+//  SIMULACRO DATA — 46 preguntas
+// ═══════════════════════════════════════════════════
+const SIM1_DATA = {
+  id:'sim-001',
+  title:'Simulacro 1 - Concurso Docente de Ingreso',
+  course:'concurso-docente',
+  timeLimit:6000,
+  active:true,
+  situations:[
+    {id:'s1',label:'SITUACIÓN 1 (Preguntas 1 a 4)',
+     context:'Laura es docente de aula en una institución educativa pública, encargada de un grupo de estudiantes de cuarto grado. En el último consejo académico, se estableció la necesidad de reforzar las competencias en lectura comprensiva, integrando estrategias innovadoras que respondan a las necesidades del grupo. Además, el rector le solicitó participar en actividades de planeación institucional y trabajar en un proyecto transversal sobre convivencia escolar.\n\nLaura ha identificado que su grupo tiene niveles variados de desempeño, lo que requiere ajustes en sus estrategias pedagógicas. Asimismo, ha recibido a tres estudiantes nuevos con Necesidades Educativas Especiales (NEE), lo que implica un trabajo conjunto con el docente de apoyo y la familia. Laura también debe cumplir con los requerimientos de registrar y analizar el avance académico de sus estudiantes.',
+     questions:[
+       {n:1,q:'Según las funciones del docente de aula ¿Cuál es la responsabilidad principal de Laura frente a la planeación de sus clases?',
+        A:'Diseñar y ejecutar actividades de refuerzo para los estudiantes con bajo rendimiento académico, priorizando el cierre de brechas.',
+        B:'Diseñar y ejecutar actividades pedagógicas que respondan a las características y contextos de los estudiantes, asegurando el desarrollo de competencias básicas y ciudadanas.',
+        C:'Diseñar y ejecutar las planeaciones de años anteriores, ajustándolas solo si los resultados institucionales lo requieren.',
+        ans:'B'},
+       {n:2,q:'¿Qué acción debería priorizar Laura para apoyar a los estudiantes con Necesidades Educativas Especiales (NEE)?',
+        A:'Trabajar en coordinación con el docente de apoyo y las familias para diseñar estrategias inclusivas que favorezcan su aprendizaje y participación en el aula.',
+        B:'Solicitar la exoneración de las actividades que requieran más esfuerzo para estos estudiantes con necesidades educativas especiales, enfocándose en lo básico y prioritario para ver el avance del estudiante.',
+        C:'Asignar actividades paralelas a los estudiantes con necesidades educativas especiales, que sean diferentes a las del resto del grupo y hacer seguimiento a cada una de ellas.',
+        ans:'A'},
+       {n:3,q:'En cuanto a la participación de Docente Laura en el proyecto de convivencia escolar, ¿Qué se espera de ella según el manual de funciones?',
+        A:'Realizar varias charlas sobre valores en la clase, y vincularlas con las actividades académicas motivando la participación de los estudiantes.',
+        B:'Delegar la gestión de convivencia escolar al coordinador de convivencia y así centrarse en las asignaturas que tiene a cargo para ver los avances.',
+        C:'Implementar estrategias que promuevan el respeto mutuo y la resolución pacífica de conflictos en el aula, alineadas con los proyectos institucionales.',
+        ans:'C'},
+       {n:4,q:'¿Cuál es el rol de Laura frente al seguimiento y evaluación del desempeño de sus estudiantes?',
+        A:'Evaluar al final de cada periodo y realizar los reportes según lo solicitado por la institución y el coordinador académico.',
+        B:'Realizar reportes de evaluación con los estudiantes con dificultades, para que reciban apoyo adicional por parte de orientación escolar y docente de apoyo.',
+        C:'Registrar y analizar periódicamente los avances académicos de cada estudiante, ajustando las estrategias pedagógicas para mejorar los resultados.',
+        ans:'C'}
+     ]},
+    {id:'s2',label:'SITUACIÓN 2 (Preguntas 5 a 8)',
+     context:'Juan es docente de aula en una institución rural multigrado. En su grupo tiene estudiantes de diferentes edades y niveles académicos, desde segundo hasta quinto grado. Durante una reunión de la comunidad educativa, las familias expresaron su preocupación por la poca participación de algunos estudiantes en las actividades, especialmente de quienes viven más alejados y enfrentan dificultades para asistir regularmente a clases.\n\nAdemás, el consejo académico le ha solicitado que participe activamente en la construcción del Plan de Mejoramiento Institucional (PMI), especialmente en estrategias para el fortalecimiento de competencias matemáticas. Por otro lado, se le pidió que revise y ajuste su planeación para incluir actividades extracurriculares que fomenten el sentido de pertenencia y la integración comunitaria.',
+     questions:[
+       {n:5,q:'¿Cuál es la principal responsabilidad de Juan frente a los estudiantes que tienen dificultades para asistir regularmente a clases, según sus funciones como Docente de aula?',
+        A:'Aplicar de manera equitativa las actividades a todos los estudiantes, sin realizar ajustes, para no generar desigualdad entre ellos.',
+        B:'Reportar las inasistencias al coordinador y centrarse en los estudiantes que asisten regularmente.',
+        C:'Garantizar el acceso a materiales de aprendizaje y realizar ajustes pedagógicos para que puedan avanzar a su propio ritmo.',
+        ans:'C'},
+       {n:6,q:'¿Qué enfoque debe priorizar Juan al participar en el Plan de Mejoramiento Institucional (PMI)?',
+        A:'Contribuir con ideas específicas que respondan a las necesidades detectadas en su grupo de estudiantes y alinearse con las metas del PMI.',
+        B:'Asistir a las reuniones y delegar la implementación de las estrategias al comité del consejo directivo y aplicar cada una de ellas en el aula de clase.',
+        C:'Desarrollar proyectos independientes en el aula que considere relevantes, y si son pertinentes, vincularlos con el plan de mejoramiento institucional.',
+        ans:'A'},
+       {n:7,q:'¿Cómo debería ajustar Juan su planeación curricular para promover la integración comunitaria?',
+        A:'Incorporar actividades grupales que incluyan elementos del contexto rural y fortalezcan el sentido de pertenencia de los estudiantes.',
+        B:'Diseñar actividades extracurriculares que sean de apoyo a las actividades académicas desarrolladas en clase, para no interferir con los temas del currículo.',
+        C:'Priorizar actividades académicas tradicionales, sin incluir actividades extracurriculares, para enfocarse en los contenidos básicos y lograr así las competencias básicas de cada estudiante.',
+        ans:'A'},
+       {n:8,q:'¿Qué estrategia puede implementar Juan para fortalecer las competencias matemáticas de los estudiantes en su aula multigrado?',
+        A:'Utilizar textos guía para todas las actividades, asegurando que todos trabajen el mismo contenido y desarrollen las mismas competencias.',
+        B:'Diseñar actividades diferenciadas según el nivel de desempeño de los estudiantes, incorporando recursos que faciliten el aprendizaje colaborativo.',
+        C:'Realizar ejercicios repetitivos que se adapten al nivel promedio del grupo, dejando a los estudiantes más avanzados trabajar por su cuenta y asignándolos como monitores de los estudiantes rezagados.',
+        ans:'B'}
+     ]},
+    {id:'s3',label:'SITUACIÓN 3 (Preguntas 9 a 12)',
+     context:'Marta es docente de primaria en una institución educativa que recientemente ha identificado un aumento en los conflictos entre los estudiantes durante los recreos. La situación ha generado preocupación en la comunidad educativa, por lo que se ha decidido implementar estrategias de convivencia escolar basadas en la Guía 49 del Ministerio de Educación Nacional.\n\nMarta ha sido encargada de liderar un proyecto de resolución pacífica de conflictos, que incluye actividades en el aula para fortalecer el respeto, la empatía y la comunicación asertiva. Además, debe trabajar con el Comité de Convivencia Escolar para ajustar el Manual de Convivencia y desarrollar estrategias que garanticen un ambiente armónico en la institución.',
+     questions:[
+       {n:9,q:'Según la Guía 49, ¿qué acción inicial debe tomar Marta para abordar los conflictos en los recreos?',
+        A:'Aplicar medidas disciplinarias inmediatas y considerar la naturaleza de los conflictos para reportar al comité de convivencia escolar.',
+        B:'Realizar un diagnóstico participativo con los estudiantes para identificar las causas de los conflictos y diseñar estrategias adecuadas.',
+        C:'Delegar la solución de los conflictos al Comité de Convivencia Escolar, y hacer seguimiento a los conflictos generados en el descanso pedagógico.',
+        ans:'B'},
+       {n:10,q:'¿Qué enfoque debe priorizar Marta al liderar actividades para la resolución pacífica de conflictos en el aula?',
+        A:'Enseñar técnicas de comunicación asertiva y fomentar la mediación entre los estudiantes.',
+        B:'Organizar debates sobre la importancia de la paz e involucrar directamente a los estudiantes en la resolución de sus propios conflictos.',
+        C:'Reforzar las reglas del Manual de Convivencia de manera estricta, incluyendo actividades prácticas.',
+        ans:'A'},
+       {n:11,q:'Al trabajar con el Comité de Convivencia Escolar, ¿qué ajuste clave debe proponer Marta al Manual de Convivencia según la Guía 49?',
+        A:'Incluir estrategias pedagógicas para promover el respeto y la empatía como principios fundamentales.',
+        B:'Redactar normas de convivencia más estrictas, incluyendo acciones formativas para los estudiantes evitando que se repitan.',
+        C:'Eliminar las sanciones disciplinarias para priorizar únicamente actividades preventivas y así garantizar la resolución de conflictos.',
+        ans:'A'},
+       {n:12,q:'¿Cómo puede Marta garantizar un ambiente armónico en la institución a largo plazo?',
+        A:'Diseñar e implementar proyectos transversales de convivencia escolar que involucren a toda la comunidad educativa.',
+        B:'Realizar reuniones mensuales con los estudiantes para recordarles las normas del Manual de Convivencia.',
+        C:'Enfocar sus esfuerzos principalmente en actividades recreativas para minimizar los conflictos y fomentar la integración de todos los estudiantes.',
+        ans:'A'}
+     ]},
+    {id:'s4',label:'SITUACIÓN 4 (Preguntas 13 a 16)',
+     context:'Luis es un docente de ética y valores que trabaja con un grupo de estudiantes de noveno grado. Ha identificado conflictos recurrentes en el aula relacionados con la falta de respeto durante las exposiciones y debates. Para mejorar el ambiente escolar, Luis decide aplicar los lineamientos de la Guía 49 y trabajar en la construcción colectiva de acuerdos de aula que promuevan el respeto y la convivencia armónica.\n\nComo parte de su plan, organiza actividades para identificar las causas de los conflictos y diseñar, junto con los estudiantes, estrategias para prevenirlos. También involucra al Comité de Convivencia Escolar para monitorear el progreso de estas acciones.',
+     questions:[
+       {n:13,q:'Según la Guía 49, ¿cuál debe ser el primer paso de Luis para construir los acuerdos de aula?',
+        A:'Realizar una lluvia de ideas sobre los conflictos que afectan la convivencia.',
+        B:'Implementar y socializar reglas claras que los estudiantes deben cumplir obligatoriamente, y pegarlas en el salón en un lugar visible.',
+        C:'Organizar charlas periódicas generales sobre la importancia de respetar las normas, el respeto y la empatía.',
+        ans:'A'},
+       {n:14,q:'¿Qué enfoque debe priorizar Luis al diseñar las estrategias para prevenir los conflictos en el aula?',
+        A:'Promover la mediación estudiantil para resolver problemas cotidianos.',
+        B:'Organizar reuniones mensuales para analizar las reglas del aula, revisar si se están cumpliendo y hacer modificaciones si es necesario.',
+        C:'Implementar sanciones pedagógicas para los estudiantes que incumplan las normas, pasando por las aulas con un cartel exponiendo la importancia de cumplir las normas.',
+        ans:'A'},
+       {n:15,q:'Al trabajar con el Comité de Convivencia Escolar, ¿qué acción clave debe realizar Luis para garantizar el seguimiento de los acuerdos?',
+        A:'Informar al comité de convivencia los acuerdos alcanzados realizando algunos ajustes adicionales.',
+        B:'Reforzar los acuerdos con charlas motivacionales semanales en el aula.',
+        C:'Establecer indicadores de seguimiento para evaluar los avances periódicamente.',
+        ans:'C'},
+       {n:16,q:'¿Cómo puede Luis involucrar a los estudiantes en la sostenibilidad de los acuerdos de aula?',
+        A:'Organizar roles de liderazgo entre los estudiantes para supervisar el cumplimiento de los acuerdos.',
+        B:'Enfocar sus esfuerzos en recordar periódicamente las reglas a los estudiantes.',
+        C:'Proponer actividades recreativas periódicamente para reforzar el trabajo en equipo.',
+        ans:'A'}
+     ]},
+    {id:'s5',label:'SITUACIÓN 5 (Preguntas 17 a 20)',
+     context:'Andrea es docente de séptimo grado en una institución educativa rural. En su clase de ciencias naturales, ha identificado que muchos de sus estudiantes presentan dificultades para relacionar los conceptos teóricos con su aplicación en el entorno local. Para abordar esta situación, decide rediseñar su planeación pedagógica integrando actividades prácticas que vinculen el currículo de ciencias con problemáticas ambientales de la comunidad.\n\nAndrea planea una salida pedagógica a una reserva natural cercana y actividades de laboratorio para estudiar el impacto de las actividades humanas en los ecosistemas locales. Además, busca coordinarse con el docente de matemáticas para incorporar análisis estadístico en el proyecto.',
+     questions:[
+       {n:17,q:'¿Qué competencia pedagógica se refleja en la decisión de Andrea de rediseñar su planeación para integrar conceptos teóricos con actividades prácticas?',
+        A:'La aplicación de actividades repetitivas para reforzar conceptos básicos del currículo.',
+        B:'El enfoque exclusivo en el cumplimiento de los estándares básicos de competencias.',
+        C:'La capacidad de articular saberes disciplinarios con estrategias metodológicas adecuadas.',
+        ans:'C'},
+       {n:18,q:'Durante la salida pedagógica, Andrea organiza una actividad de observación en la que los estudiantes identifican especies en riesgo. ¿Qué aspecto de su competencia pedagógica se manifiesta en esta acción?',
+        A:'El uso exclusivo del entorno para actividades recreativas relacionado con los contenidos.',
+        B:'La capacidad de diseñar experiencias educativas que integren el entorno con el aprendizaje.',
+        C:'La priorización de actividades que se enfocan en cumplir los objetivos de corto plazo.',
+        ans:'B'},
+       {n:19,q:'¿Qué estrategia debe priorizar Andrea al coordinarse con el docente de matemáticas para fortalecer las competencias de los estudiantes?',
+        A:'Diseñar actividades conjuntas que combinen análisis estadístico y problemáticas ambientales locales.',
+        B:'Dividir los contenidos de cada asignatura para que los estudiantes los trabajen por separado.',
+        C:'Usar exclusivamente ejemplos de matemáticas simples para analizar los datos recopilados.',
+        ans:'A'},
+       {n:20,q:'En la evaluación del proyecto, Andrea incluye una autoevaluación de los estudiantes sobre lo aprendido. ¿Qué demuestra esta estrategia sobre su competencia pedagógica?',
+        A:'Su enfoque exclusivo en la retroalimentación grupal sin evaluar individualmente.',
+        B:'Su capacidad para fomentar la reflexión en los estudiantes sobre sus propios procesos de aprendizaje.',
+        C:'Su habilidad para reducir la evaluación a un registro de calificaciones cuantitativas.',
+        ans:'B'}
+     ]},
+    {id:'s6',label:'SITUACIÓN 6 (Preguntas 21 a 24)',
+     context:'En una institución educativa rural, la profesora Carolina, encargada de cuarto grado, busca articular el currículo con las necesidades sociales y culturales de su comunidad. Para ello, diseña el proyecto de aula "Nuestra comunidad, nuestro hogar", que aborda temas como la historia local, la biodiversidad de la región y los oficios tradicionales. Carolina involucra a los padres de familia, quienes comparten sus conocimientos y experiencias con los estudiantes en sesiones especiales.\n\nEl proyecto tiene como objetivo desarrollar en los estudiantes competencias en ciencias sociales, ética y educación ambiental, conectando los contenidos del currículo con la realidad y valores de la comunidad.',
+     questions:[
+       {n:21,q:'Según el enfoque del currículo pedagógico, ¿qué aspecto refleja la integración de padres de familia en el proyecto de Carolina?',
+        A:'La organización de actividades exclusivamente para reforzar contenidos teóricos.',
+        B:'La evaluación constante de los objetivos académicos del área.',
+        C:'La relación entre las prácticas pedagógicas y el contexto social y cultural.',
+        ans:'C'},
+       {n:22,q:'¿Qué enfoque debe priorizar Carolina al diseñar actividades relacionadas con los oficios tradicionales de la comunidad?',
+        A:'Plantear actividades que se centren en los contenidos establecidos por el currículo.',
+        B:'Resaltar el valor cultural y social de los oficios, integrándolos con las competencias del plan de estudios.',
+        C:'Utilizar los oficios tradicionales como un tema importante en actividades extracurriculares.',
+        ans:'B'},
+       {n:23,q:'¿Cómo puede Carolina evaluar el impacto del proyecto en los estudiantes?',
+        A:'Diseñando instrumentos de evaluación que consideren tanto los aprendizajes académicos como los valores culturales adquiridos.',
+        B:'Aplicando pruebas teóricas para medir cada uno de los contenidos del área de ciencias sociales.',
+        C:'Solicitando un informe general sobre la experiencia del proyecto especificando los criterios de evaluación.',
+        ans:'A'},
+       {n:24,q:'¿Qué principio fundamental del currículo pedagógico se manifiesta en el proyecto de Carolina?',
+        A:'La orientación exclusiva de las actividades hacia el cumplimiento de los indicadores de desempeño.',
+        B:'La aplicación estricta de los estándares curriculares establecidos por el Ministerio de Educación.',
+        C:'La contextualización de la educación al integrar las realidades sociales y culturales en las prácticas pedagógicas.',
+        ans:'C'}
+     ]},
+    {id:'s7',label:'SITUACIÓN 7 (Preguntas 25 a 28)',
+     context:'La profesora María está trabajando con su grupo de estudiantes de sexto grado en la enseñanza de fracciones. Para hacerlo, decide usar como base situaciones cotidianas que involucren repartición, como compartir alimentos o dividir cantidades de dinero. En una de las actividades, presenta un reto en el que deben dividir un pastel en partes iguales para un grupo de amigos, utilizando herramientas como dibujos, representaciones concretas y cálculos. María se enfoca en que los estudiantes participen activamente y conecten el concepto de fracciones con su vida diaria.',
+     questions:[
+       {n:25,q:'¿Cuál es el componente clave de la didáctica que María está implementando en esta actividad?',
+        A:'La repetición de ejercicios estándar para fortalecer la mecanización del cálculo.',
+        B:'La conexión entre el saber y su enseñanza a través de un contexto significativo.',
+        C:'La memorización de conceptos teóricos relacionado con la práctica.',
+        ans:'B'},
+       {n:26,q:'¿Cómo puede María evaluar si los estudiantes comprenden el concepto de fracciones desde esta metodología?',
+        A:'Solicitando a los estudiantes que expliquen, mediante ejemplos concretos, cómo aplicar fracciones en su vida cotidiana.',
+        B:'Aplicando una prueba escrita con ejercicios numéricos con conexión contextual y llevar a los estudiantes a explicar cómo los resolvieron.',
+        C:'Observando a cada uno cómo resuelven ejercicios mecánicos durante la clase e identificar a aquellos que tienen dificultades para reforzar con actividades complementarias.',
+        ans:'A'},
+       {n:27,q:'¿Qué dimensión metodológica subyace en la estrategia de enseñanza de María?',
+        A:'La participación activa de los estudiantes en la construcción del conocimiento.',
+        B:'La aplicación exclusiva de técnicas mecánicas para fortalecer la práctica.',
+        C:'La preparación previa de los materiales para facilitar el dictado de la clase.',
+        ans:'A'},
+       {n:28,q:'¿Qué otro recurso podría integrar María para fortalecer la comprensión de las fracciones, alineándose con un enfoque didáctico reflexivo?',
+        A:'Lecturas creativas sobre la teoría de las fracciones alternándolas con actividades prácticas.',
+        B:'Ejercicios mecánicos en los que resuelvan múltiples operaciones similares.',
+        C:'Juegos interactivos donde los estudiantes deban resolver retos con fracciones.',
+        ans:'C'}
+     ]},
+    {id:'s8',label:'SITUACIÓN 8 (Preguntas 29 a 32)',
+     context:'El profesor Julián está diseñando un plan de evaluación para sus estudiantes de noveno grado en el área de Ciencias Naturales. Su objetivo principal es identificar cómo sus estudiantes comprenden los conceptos de genética y relacionan la teoría con ejemplos prácticos. Julián decide utilizar diferentes estrategias, como la resolución de problemas, debates sobre implicaciones éticas de la genética y cuestionarios.\n\nDurante el desarrollo de estas actividades, se da cuenta de que algunos estudiantes no logran argumentar adecuadamente sus respuestas, lo que le lleva a reflexionar sobre si las actividades propuestas son las más adecuadas para alcanzar los objetivos del aprendizaje.',
+     questions:[
+       {n:29,q:'¿Qué acción debería tomar el profesor Julián para asegurar que la evaluación sea un proceso formativo?',
+        A:'Realizar una prueba final estandarizada basada específicamente en conceptos memorizados.',
+        B:'Implementar una autoevaluación donde los estudiantes reflexionen sobre su propio proceso de aprendizaje.',
+        C:'Repetir las actividades tal como están diseñadas, pero con más tiempo para su desarrollo.',
+        ans:'B'},
+       {n:30,q:'¿Qué criterio debe tener en cuenta Julián al seleccionar las actividades evaluativas para sus estudiantes?',
+        A:'Que las actividades permitan medir los resultados finales de aprendizaje de los estudiantes.',
+        B:'Que las actividades incluyan la evaluación de los procesos de aprendizaje y su relación con el contexto.',
+        C:'Que las actividades sean fáciles de calificar para ahorrar tiempo en la revisión y así enfocar el tiempo ahorrado en fortalecer las dificultades de cada uno de ellos.',
+        ans:'B'},
+       {n:31,q:'Si el profesor Julián desea evaluar las competencias argumentativas en genética, ¿qué estrategia debería usar?',
+        A:'Diseñar preguntas abiertas donde los estudiantes relacionen conceptos teóricos con problemáticas reales.',
+        B:'Elaborar un cuestionario de selección múltiple con respuestas correctas y únicas, para después explicarles cada una de las respuestas correctas.',
+        C:'Presentarles un resumen teórico para que lo memoricen y repitan en un examen oral fomentando el autoaprendizaje.',
+        ans:'A'},
+       {n:32,q:'¿Qué acción podría tomar el profesor Julián si identifica que las estrategias evaluativas no están logrando los resultados esperados?',
+        A:'Realizar un análisis crítico de las actividades diseñadas y ajustarlas según las necesidades del grupo.',
+        B:'Aplicar nuevamente las mismas actividades para confirmar si los resultados se mantienen constantes y así realizar un análisis estadístico.',
+        C:'Implementar actividades más simples que sean fácilmente comprendidas por todos los estudiantes y esperar que todos lleguen a las competencias básicas.',
+        ans:'A'}
+     ]},
+    {id:'s9',label:'SITUACIÓN 9 (Preguntas 33 a 36)',
+     context:'La docente Luisa observa que, a pesar de sus esfuerzos, los estudiantes de grado noveno muestran desinterés y dificultad para comprender temas relacionados con el análisis literario en la clase de Lengua Castellana. Durante la planeación de sus clases, decide reflexionar sobre su práctica educativa para identificar problemáticas en el proceso de enseñanza y aprendizaje.\n\nLuisa considera que podría incorporar estrategias más participativas y evaluar el impacto de sus cambios en la motivación y desempeño de los estudiantes. Además, evalúa cómo ha sido su interacción con los estudiantes y cómo ha influido en los resultados obtenidos hasta ahora.',
+     questions:[
+       {n:33,q:'¿Qué acción inicial debe tomar la docente Luisa para reflexionar sobre su práctica educativa?',
+        A:'Revisar las evaluaciones de los estudiantes para identificar los errores más comunes y realizar los ajustes necesarios.',
+        B:'Analizar los procesos de planeación y evaluar los resultados obtenidos hasta el momento.',
+        C:'Consultar con otros docentes estrategias exitosas en sus áreas para aplicar en su clase.',
+        ans:'B'},
+       {n:34,q:'Durante la interactividad en el aula, Luisa nota que los estudiantes participan poco. ¿Qué aspecto del triángulo interactivo debería priorizar para abordar esta problemática?',
+        A:'Fomentar la interacción entre los estudiantes y el contenido mediante actividades dinámicas.',
+        B:'Cambiar la metodología de evaluación para enfocarse más en las pruebas orales.',
+        C:'Aumentar el tiempo de exposición magistral para aclarar dudas de forma individual.',
+        ans:'A'},
+       {n:35,q:'¿Qué podría hacer la docente Luisa después de implementar cambios en sus estrategias didácticas para evaluar su impacto?',
+        A:'Solicitar retroalimentación directa de los estudiantes sobre las nuevas estrategias.',
+        B:'Realizar una autoevaluación de su desempeño y registrar observaciones.',
+        C:'Diseñar una rúbrica para medir el rendimiento de los estudiantes en las actividades implementadas.',
+        ans:'A'},
+       {n:36,q:'Si Luisa decide involucrar a sus estudiantes en el diseño de las próximas actividades, ¿qué competencia pedagógica estaría desarrollando?',
+        A:'La capacidad de adaptar las estrategias a los resultados de evaluación previos.',
+        B:'La habilidad de generar espacios de interactividad que incluyan la participación estudiantil.',
+        C:'La destreza de implementar actividades estandarizadas para obtener resultados objetivos.',
+        ans:'B'}
+     ]},
+    {id:'s10',label:'SITUACIÓN 10 (Preguntas 37 a 40)',
+     context:'El profesor Andrés imparte la asignatura de Ciencias Naturales a estudiantes de grado décimo. Durante una clase sobre el cambio climático, nota que los estudiantes tienen dificultad para relacionar conceptos teóricos con situaciones prácticas de su entorno. Andrés decide reflexionar sobre su práctica educativa, enfocándose en cómo la interactividad en el aula y la planeación docente pueden mejorar el aprendizaje. Además, planea evaluar si sus estrategias actuales fomentan una comprensión crítica de los temas y cómo puede ajustar sus métodos para lograr mejores resultados.',
+     questions:[
+       {n:37,q:'¿Qué estrategia inicial podría implementar el profesor Andrés para reflexionar sobre su práctica educativa?',
+        A:'Revisar las actividades de planeación inicial para identificar su alineación con los objetivos de aprendizaje.',
+        B:'Reunir a los estudiantes para que compartan sus opiniones sobre el cambio climático.',
+        C:'Observar clases de otros docentes para identificar métodos de enseñanza efectivos.',
+        ans:'A'},
+       {n:38,q:'Para fortalecer la interactividad en el aula, ¿qué enfoque sería más adecuado según el triángulo interactivo?',
+        A:'Diseñar actividades prácticas que promuevan la interacción entre estudiantes y contenido.',
+        B:'Asignar lecturas individuales para reforzar los conceptos vistos en clase.',
+        C:'Incrementar las sesiones expositivas con más información detallada.',
+        ans:'A'},
+       {n:39,q:'¿Cómo podría Andrés evaluar si sus nuevas estrategias están ayudando a los estudiantes a comprender mejor el cambio climático?',
+        A:'Realizar un foro donde los estudiantes presenten propuestas para mitigar el cambio climático en su entorno.',
+        B:'Aplicar una prueba escrita con preguntas de selección múltiple al finalizar el tema para revisar el avance de cada uno de ellos.',
+        C:'Observar el nivel de participación de los estudiantes durante las sesiones de trabajo grupal y asignarles una nota según haya sido su participación.',
+        ans:'A'},
+       {n:40,q:'Si Andrés decide integrar el aprendizaje basado en proyectos para abordar el cambio climático, ¿qué competencia pedagógica estaría priorizando?',
+        A:'La capacidad de reflexionar sobre los resultados obtenidos y replantear estrategias de enseñanza.',
+        B:'La habilidad de diseñar prácticas educativas que conecten los saberes escolares con problemáticas del entorno.',
+        C:'La destreza de implementar actividades con enfoques teóricos para fortalecer la base conceptual.',
+        ans:'B'}
+     ]},
+    {id:'s11',label:'SITUACIÓN 11 (Preguntas 41 a 43)',
+     context:'En una clase de ciencias naturales de cuarto grado, el maestro organiza una actividad en grupos para explorar los diferentes ecosistemas de su región. Los estudiantes deben preparar una presentación corta sobre un ecosistema específico. El maestro asigna 30 minutos para investigar y preparar el tema, y 10 minutos para que cada grupo exponga sus hallazgos.\n\nCuando llega el momento de las presentaciones, algunos grupos no han terminado de organizar sus ideas y otros no lograron concluir la actividad por falta de tiempo. Como resultado, las presentaciones son incompletas y generan confusión entre los estudiantes. El maestro se da cuenta de que el tiempo asignado no fue suficiente para que los estudiantes terminaran su tarea adecuadamente.',
+     questions:[
+       {n:41,q:'¿Cuál fue el principal error en la planificación del maestro?',
+        A:'No permitir que los estudiantes elijan sus propios temas.',
+        B:'No considerar el tiempo necesario para realizar y presentar la actividad de manera adecuada.',
+        C:'No supervisar a los estudiantes durante el desarrollo de la actividad.',
+        ans:'B'},
+       {n:42,q:'¿Qué acción debería tomar el maestro para mejorar este tipo de actividades en el futuro?',
+        A:'Asignar menos tiempo para las presentaciones y más tiempo para la investigación, para enfocarlos en lo realmente importante.',
+        B:'Proporcionar una guía más detallada sobre los pasos a seguir en la actividad y distribuir el tiempo en etapas específicas.',
+        C:'Evitar realizar actividades grupales que impliquen investigación y exposición, fortaleciendo las competencias individuales a la hora de investigar.',
+        ans:'B'},
+       {n:43,q:'¿Qué estrategia pedagógica podría ayudar a los estudiantes a organizarse mejor en este tipo de actividades?',
+        A:'Incluir una etapa inicial en la que practiquen la gestión del tiempo en tareas más pequeñas.',
+        B:'Permitir que los estudiantes trabajen sin supervisión para fomentar su independencia.',
+        C:'Eliminar la necesidad de realizar presentaciones y centrarse solo en la investigación.',
+        ans:'A'}
+     ]},
+    {id:'s12',label:'SITUACIÓN 12 (Preguntas 44 a 46)',
+     context:'Durante el recreo, dos estudiantes de sexto grado tienen un desacuerdo sobre quién puede usar primero el balón de fútbol. La discusión escala rápidamente hasta que uno de ellos empuja al otro y empieza una pelea física. La profesora de turno interviene y lleva a ambos estudiantes a la coordinación. El coordinador reúne a los involucrados y a algunos testigos para reconstruir los hechos y analizar las causas del conflicto. Luego, organiza una actividad grupal en la que se trabaja el respeto por las reglas y la importancia de la resolución pacífica de los problemas.',
+     questions:[
+       {n:44,q:'¿Qué elemento clave se utilizó en la intervención del coordinador para resolver el conflicto?',
+        A:'Sancionar pedagógicamente a los estudiantes involucrados y evitar que estos hechos se repitan.',
+        B:'Involucrar a toda la comunidad escolar en el análisis del conflicto, para tener varios puntos de vista y dar solución al mismo.',
+        C:'Analizar las causas del conflicto y promover el respeto por las reglas mediante una actividad grupal.',
+        ans:'C'},
+       {n:45,q:'¿Qué estrategia podría haber ayudado a prevenir este conflicto durante el recreo?',
+        A:'Establecer normas claras sobre el uso de los materiales deportivos y fomentar el diálogo.',
+        B:'Prohibir el uso de balones durante el recreo para evitar disputas.',
+        C:'Asignar un docente para supervisar exclusivamente los juegos con balón.',
+        ans:'A'},
+       {n:46,q:'¿Qué aprendizaje clave debería promoverse entre los estudiantes tras este incidente?',
+        A:'Que las actividades deportivas no deben ser prioritarias durante el recreo.',
+        B:'Que las reglas son inamovibles y el incumplimiento siempre debe ser sancionado para evitar repeticiones de estos.',
+        C:'Que los conflictos son parte de la convivencia, pero deben abordarse desde el respeto y el diálogo.',
+        ans:'C'}
+     ]}
+  ]
+};
+
+// Init simulacros if none
+(function initDB(){
+  if(!simulacros().length){
+    setSimulacros([SIM1_DATA]);
+  }
+})();
+
+// ═══════════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════════
+function showSec(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goRegister(course){
+  showSec('sec-register');
+  document.getElementById('reg-course').value=course;
+}
+
+// ═══════════════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════════════
+function doRegister(){
+  const name=v('reg-name'), doc=v('reg-doc'), email=v('reg-email'),
+        phone=v('reg-phone'), course=v('reg-course'),
+        pass=v('reg-pass'), pass2=v('reg-pass2');
+  clearAlert('reg-alert');
+  if(!name||!doc||!email||!phone||!course||!pass) return showAlert('reg-alert','err','Por favor completa todos los campos.');
+  if(pass.length<6) return showAlert('reg-alert','err','La contraseña debe tener al menos 6 caracteres.');
+  if(pass!==pass2) return showAlert('reg-alert','err','Las contraseñas no coinciden.');
+  const all=users();
+  if(all.find(u=>u.docNum===doc)) return showAlert('reg-alert','err','Ya existe una cuenta con ese número de documento.');
+  if(all.find(u=>u.email===email)) return showAlert('reg-alert','err','Ya existe una cuenta con ese correo electrónico.');
+  const newUser={id:'u'+Date.now(),docNum:doc,name,email,phone,course,password:pass,active:true,createdAt:new Date().toISOString()};
+  all.push(newUser);
+  setUsers(all);
+  setSession({userId:newUser.id,docNum:doc,name,course,isAdmin:false});
+  showAlert('reg-alert','ok','¡Cuenta creada con éxito! Redirigiendo...');
+  setTimeout(()=>{loadDashboard();showSec('sec-dashboard')},1200);
+}
+
+function doLogin(){
+  const doc=v('login-doc'), pass=v('login-pass');
+  clearAlert('login-alert');
+  if(!doc||!pass) return showAlert('login-alert','err','Ingresa tu documento y contraseña.');
+  const u=users().find(u=>u.docNum===doc&&u.password===pass);
+  if(!u) return showAlert('login-alert','err','Documento o contraseña incorrectos.');
+  if(!u.active) return showAlert('login-alert','err','Tu cuenta está suspendida. Contacta al administrador.');
+  setSession({userId:u.id,docNum:u.docNum,name:u.name,course:u.course,isAdmin:false});
+  loadDashboard();showSec('sec-dashboard');
+}
+
+function doLogout(){
+  DB.del('session');showSec('sec-landing');
+}
+
+function doAdminLogin(){
+  const usr=v('adm-user'),pass=v('adm-pass');
+  const cfg=adminCfg();
+  clearAlert('admin-login-alert');
+  if(usr===cfg.username&&pass===cfg.password){
+    setSession({isAdmin:true,name:'Administrador'});
+    loadAdminDashboard();showSec('sec-admin');
+  } else {
+    showAlert('admin-login-alert','err','Credenciales incorrectas.');
+  }
+}
+
+function doAdminLogout(){
+  DB.del('session');showSec('sec-landing');
+}
+
+// ═══════════════════════════════════════════════════
+//  STUDENT DASHBOARD
+// ═══════════════════════════════════════════════════
+const COURSE_LABELS={'concurso-docente':'Concurso Docente de Ingreso 2026','ascenso':'Concurso de Ascenso Docente','preicfes':'Pre-ICFES (Saber 11)'};
+
+function loadDashboard(){
+  const sess=session(); if(!sess||sess.isAdmin)return;
+  document.getElementById('dash-nav-user').textContent=sess.name;
+  document.getElementById('dash-welcome').textContent='Bienvenido/a,';
+  document.getElementById('dash-title').textContent=sess.name;
+  document.getElementById('dash-subtitle').textContent='Curso: '+COURSE_LABELS[sess.course];
+  // Stats
+  const myResults=results().filter(r=>r.userId===sess.userId);
+  const sims=simulacros().filter(s=>s.course===sess.course&&s.active);
+  const avgScore=myResults.length?Math.round(myResults.reduce((a,r)=>a+r.score,0)/myResults.length):0;
+  document.getElementById('dash-stats').innerHTML=`
+    <div class="stat-card"><div class="sn">${sims.length}</div><div class="sl">Simulacros Disponibles</div></div>
+    <div class="stat-card"><div class="sn">${myResults.length}</div><div class="sl">Realizados</div></div>
+    <div class="stat-card"><div class="sn">${avgScore}</div><div class="sl">Promedio /100</div></div>
+    <div class="stat-card"><div class="sn">${myResults.length?getLevel(avgScore):'—'}</div><div class="sl">Nivel Actual</div></div>`;
+  // Simulacros list
+  const el=document.getElementById('dash-simulacros-list');
+  if(!sims.length){el.innerHTML='<div class="empty-state"><div class="ei">📋</div><p>No hay simulacros disponibles aún para tu curso.</p></div>';return;}
+  el.innerHTML=sims.map(s=>{
+    const myR=myResults.filter(r=>r.simulacroId===s.id);
+    const best=myR.length?Math.max(...myR.map(r=>r.score)):null;
+    const mins=Math.floor(s.timeLimit/60);
+    return `<div class="sim-card">
+      <div class="sim-card-icon">📝</div>
+      <div class="sim-card-body">
+        <div class="sim-card-title">${s.title}</div>
+        <div class="sim-card-meta">
+          <span>⏱ ${mins} minutos</span>
+          <span>❓ ${countQs(s)} preguntas</span>
+          ${myR.length?`<span>✅ Realizados: ${myR.length} · Mejor nota: <strong style="color:var(--gold)">${best}/100</strong></span>`:'<span class="badge badge-info">Nuevo</span>'}
+        </div>
+      </div>
+      <div class="sim-card-actions">
+        ${myR.length?`<button class="btn btn-ghost btn-sm" onclick="loadSimIntro('${s.id}');showSec('sec-sim-intro')">Repetir</button>`:''}
+        <button class="btn btn-gold btn-sm" onclick="loadSimIntro('${s.id}');showSec('sec-sim-intro')">${myR.length?'Ver':'Iniciar'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function loadDashVideos(){
+  const sess=session(); if(!sess)return;
+  const vids=videos().filter(v=>v.course===sess.course||v.course==='all');
+  const el=document.getElementById('dash-videos-list');
+  if(!vids.length){el.innerHTML='<div class="empty-state"><div class="ei">🎬</div><p>No hay videos disponibles aún. El administrador los agregará próximamente.</p></div>';return;}
+  el.innerHTML=vids.map(v=>`
+    <div class="video-card">
+      <div class="video-thumb">▶</div>
+      <div class="video-body">
+        <div class="video-title"><a href="${v.url}" target="_blank" style="color:var(--white);text-decoration:none">${v.title}</a></div>
+        <div class="video-desc">${v.description||''}</div>
+      </div>
+      <a href="${v.url}" target="_blank" class="btn btn-gold btn-sm" style="margin:14px;flex-shrink:0">Ver →</a>
+    </div>`).join('');
+}
+
+function loadDashRendimiento(){
+  const sess=session(); if(!sess)return;
+  const myR=results().filter(r=>r.userId===sess.userId);
+  const el=document.getElementById('dash-rendimiento-content');
+  if(!myR.length){el.innerHTML='<div class="empty-state"><div class="ei">📊</div><p>Aún no has realizado ningún simulacro. ¡Empieza ya!</p></div>';return;}
+  // Sort by date
+  myR.sort((a,b)=>new Date(b.completedAt)-new Date(a.completedAt));
+  const sims=simulacros();
+  let html='<div class="grid-2 mb-3">';
+  html+=`<div class="card"><h4 class="text-gold mb-2">Historial de Simulacros</h4>`;
+  html+=myR.map(r=>{
+    const sim=sims.find(s=>s.id===r.simulacroId);
+    const d=new Date(r.completedAt).toLocaleDateString('es-CO');
+    return `<div class="sim-card" style="margin-bottom:10px">
+      <div class="sim-card-icon" style="width:42px;height:42px;font-size:1.2rem">${scoreEmoji(r.score)}</div>
+      <div class="sim-card-body">
+        <div style="font-size:.9rem;font-weight:600;color:var(--white)">${sim?sim.title:'Simulacro'}</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,0.5)">${d} · ${r.correct}/${r.total} correctas</div>
+      </div>
+      <div><span class="badge ${scoreBadge(r.score)}">${r.score}/100</span></div>
+    </div>`;
+  }).join('');
+  html+='</div>';
+  // Weaknesses
+  html+=`<div class="card"><h4 class="text-gold mb-2">Áreas de Mejora</h4>`;
+  const weakMap=analyzeWeaknesses(myR,sims);
+  if(weakMap.length){
+    html+=weakMap.slice(0,6).map(w=>`
+      <div class="mb-2">
+        <div class="flex justify-between mb-1"><span style="font-size:.85rem">${w.label}</span><span style="font-size:.82rem;color:var(--gold)">${w.pct}%</span></div>
+        <div class="prog-bar-wrap"><div class="prog-bar" style="width:${w.pct}%;background:${w.pct>=70?'linear-gradient(90deg,var(--gold-d),var(--gold-l))':'linear-gradient(90deg,#b02a37,#ff6b6b)'}"></div></div>
+      </div>`).join('');
+  } else { html+='<p class="text-muted">Sin datos suficientes.</p>'; }
+  html+='</div></div>';
+  el.innerHTML=html;
+}
+
+function switchDashTab(tab,el){
+  document.querySelectorAll('.dash-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('dash-tab-'+tab).classList.add('active');
+  if(tab==='videos')loadDashVideos();
+  if(tab==='rendimiento')loadDashRendimiento();
+}
+
+// ═══════════════════════════════════════════════════
+//  SIMULACRO ENGINE
+// ═══════════════════════════════════════════════════
+let currentSimId=null, examTimer=null, examSeconds=0, examAnswers={};
+
+function countQs(sim){return sim.situations.reduce((a,s)=>a+s.questions.length,0);}
+
+function loadSimIntro(simId){
+  currentSimId=simId;
+  const sim=simulacros().find(s=>s.id===simId);
+  if(!sim)return;
+  document.getElementById('sim-intro-title').textContent=sim.title;
+  document.getElementById('sim-intro-course').textContent=COURSE_LABELS[sim.course]||sim.course;
+  document.getElementById('sim-intro-q').textContent=countQs(sim);
+  document.getElementById('sim-intro-t').textContent=Math.floor(sim.timeLimit/60)+' min';
+  // Show previous results
+  const sess=session();
+  const myR=results().filter(r=>r.userId===sess.userId&&r.simulacroId===simId);
+  const prev=document.getElementById('sim-intro-prev');
+  if(myR.length){
+    myR.sort((a,b)=>new Date(b.completedAt)-new Date(a.completedAt));
+    const best=Math.max(...myR.map(r=>r.score));
+    prev.innerHTML=`<div class="alert alert-info">📊 Has realizado este simulacro <strong>${myR.length}</strong> vez(ces). Mejor nota: <strong>${best}/100</strong> (${getLevel(best)})</div>`;
+  } else { prev.innerHTML=''; }
+}
+
+function startExam(){
+  const sim=simulacros().find(s=>s.id===currentSimId);
+  if(!sim)return;
+  examAnswers={};
+  examSeconds=sim.timeLimit;
+  document.getElementById('exam-title').textContent=sim.title;
+  renderExam(sim);
+  showSec('sec-exam');
+  startTimer();
+}
+
+function renderExam(sim){
+  let html='';
+  sim.situations.forEach(sit=>{
+    html+=`<div class="sit-box"><div class="sit-label">CONTESTE LAS PREGUNTAS ${sit.label.includes('(')?(sit.label.match(/\(([^)]+)\)/)||['',''])[1]:'siguientes'} DE ACUERDO LA SIGUIENTE SITUACIÓN</div><div class="sit-text">${sit.context.replace(/\n\n/g,'<br><br>')}</div></div>`;
+    sit.questions.forEach(q=>{
+      html+=`<div class="question-block" id="qb-${q.n}">
+        <div class="question-num">Pregunta ${q.n}</div>
+        <div class="question-text">${q.q}</div>
+        ${['A','B','C'].map(opt=>`
+          <label class="option-label" id="ol-${q.n}-${opt}">
+            <input type="radio" name="q${q.n}" value="${opt}" onchange="selectAnswer(${q.n},'${opt}')">
+            <span class="option-key">${opt}.</span>
+            <span class="option-text">${q[opt]}</span>
+          </label>`).join('')}
+      </div>`;
+    });
+  });
+  document.getElementById('exam-body').innerHTML=html;
+  updateAnsweredCount();
+}
+
+function selectAnswer(n, opt){
+  examAnswers[n]=opt;
+  ['A','B','C'].forEach(o=>{
+    const el=document.getElementById(`ol-${n}-${o}`);
+    if(el) el.classList.toggle('selected',o===opt);
+  });
+  updateAnsweredCount();
+}
+
+function updateAnsweredCount(){
+  const total=countQs(simulacros().find(s=>s.id===currentSimId)||{situations:[]});
+  const answered=Object.keys(examAnswers).length;
+  document.getElementById('exam-answered').textContent=`${answered} / ${total} respondidas`;
+}
+
+function startTimer(){
+  clearInterval(examTimer);
+  updateTimerDisplay();
+  examTimer=setInterval(()=>{
+    examSeconds--;
+    updateTimerDisplay();
+    if(examSeconds<=0){clearInterval(examTimer);submitExam();}
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const h=Math.floor(examSeconds/3600);
+  const m=Math.floor((examSeconds%3600)/60);
+  const s=examSeconds%60;
+  const txt=(h>0?h+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  const el=document.getElementById('exam-timer');
+  el.textContent=txt;
+  el.className='exam-timer'+(examSeconds<=120?' danger':examSeconds<=300?' warn':'');
+}
+
+function confirmSubmit(){
+  const sim=simulacros().find(s=>s.id===currentSimId);
+  const total=countQs(sim);
+  const answered=Object.keys(examAnswers).length;
+  const unanswered=total-answered;
+  document.getElementById('confirm-msg').textContent=
+    unanswered>0?`Tienes ${unanswered} pregunta(s) sin responder. ¿Deseas entregar de todas formas?`:'Has respondido todas las preguntas. ¿Deseas entregar?';
+  document.getElementById('confirm-overlay').classList.remove('hidden');
+}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.add('hidden');}
+
+function submitExam(){
+  closeConfirm();
+  clearInterval(examTimer);
+  const sim=simulacros().find(s=>s.id===currentSimId);
+  if(!sim)return;
+  // Calculate score
+  let correct=0, wrong=0, skip=0;
+  const allQs=sim.situations.flatMap(s=>s.questions);
+  const total=allQs.length;
+  allQs.forEach(q=>{
+    if(!examAnswers[q.n]) skip++;
+    else if(examAnswers[q.n]===q.ans) correct++;
+    else wrong++;
+  });
+  const score=Math.round((correct/total)*100);
+  const timeUsed=sim.timeLimit-examSeconds;
+  const sess=session();
+  // Save result
+  const result={
+    id:'r'+Date.now(),
+    userId:sess.userId,
+    simulacroId:sim.id,
+    answers:{...examAnswers},
+    score,correct,wrong,skip,total,
+    timeUsed,completedAt:new Date().toISOString()
+  };
+  const allR=results(); allR.push(result); setResults(allR);
+  showResults(result, sim);
+}
+
+function showResults(result, sim){
+  document.getElementById('res-score').textContent=result.score;
+  const lvl=getLevel(result.score);
+  const lvlEl=document.getElementById('res-level');
+  lvlEl.textContent=lvl;
+  lvlEl.className='level-badge level-'+getClassLevel(result.score);
+  document.getElementById('res-sim-name').textContent=sim.title;
+  document.getElementById('res-correct').textContent=result.correct;
+  document.getElementById('res-wrong').textContent=result.wrong;
+  document.getElementById('res-skip').textContent=result.skip;
+  // Weaknesses
+  const weak=sim.situations.map(sit=>{
+    const qs=sit.questions;
+    const corr=qs.filter(q=>result.answers[q.n]===q.ans).length;
+    const pct=Math.round((corr/qs.length)*100);
+    return{label:sit.label.replace(/\s*\([^)]*\)/,''),qs:qs.length,corr,pct};
+  }).filter(w=>w.pct<70).sort((a,b)=>a.pct-b.pct);
+  const wEl=document.getElementById('res-weaknesses');
+  if(weak.length){
+    wEl.innerHTML=`<div class="alert alert-warn"><span>📌</span><span><strong>Áreas de oportunidad:</strong> ${weak.map(w=>w.label+' ('+w.pct+'%)').join(' · ')}</span></div>`;
+  } else {
+    wEl.innerHTML=`<div class="alert alert-ok"><span>🎉</span><span>¡Excelente desempeño en todas las áreas!</span></div>`;
+  }
+  // Review
+  let reviewHtml='';
+  sim.situations.forEach(sit=>{
+    reviewHtml+=`<div class="review-sit"><div class="review-sit-title">${sit.label}</div>`;
+    sit.questions.forEach(q=>{
+      const ua=result.answers[q.n];
+      const isOk=ua===q.ans;
+      const isSkip=!ua;
+      reviewHtml+=`<div class="review-q">
+        <div class="review-qnum ${isSkip?'skip':isOk?'ok':'err'}">${q.n}</div>
+        <div class="review-qtext">
+          <div>${q.q}</div>
+          <div class="review-ans">
+            ${isSkip?'<span class="text-muted">Sin responder</span>':
+              isOk?`<span class="text-ok">✓ Correcto: ${ua}. ${q[ua]}</span>`:
+              `<span class="text-err">✗ Respondiste: ${ua}. ${q[ua]}</span><br><span class="text-ok">✓ Correcto: ${q.ans}. ${q[q.ans]}</span>`}
+          </div>
+        </div>
+      </div>`;
+    });
+    reviewHtml+='</div>';
+  });
+  document.getElementById('res-review').innerHTML=reviewHtml;
+  showSec('sec-results');
+}
+
+// ═══════════════════════════════════════════════════
+//  ADMIN DASHBOARD
+// ═══════════════════════════════════════════════════
+function loadAdminDashboard(){
+  const us=users(), rs=results(), ss=simulacros(), vs=videos();
+  // Stats
+  const avg=rs.length?Math.round(rs.reduce((a,r)=>a+r.score,0)/rs.length):0;
+  document.getElementById('adm-stats-cards').innerHTML=`
+    <div class="stat-card"><div class="sn">${us.length}</div><div class="sl">Estudiantes</div></div>
+    <div class="stat-card"><div class="sn">${rs.length}</div><div class="sl">Simulacros Realizados</div></div>
+    <div class="stat-card"><div class="sn">${ss.length}</div><div class="sl">Simulacros</div></div>
+    <div class="stat-card"><div class="sn">${vs.length}</div><div class="sl">Videos</div></div>
+    <div class="stat-card"><div class="sn">${avg}</div><div class="sl">Promedio General</div></div>
+    <div class="stat-card"><div class="sn">${us.filter(u=>u.active).length}</div><div class="sl">Activos</div></div>`;
+  // Recent users
+  const recent=us.slice(-5).reverse();
+  document.getElementById('adm-recent-users').innerHTML=`<h4 class="text-gold mb-2">Últimos Registros</h4>`+
+    (recent.length?recent.map(u=>`<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:.85rem"><strong>${u.name}</strong><br><span class="text-muted">${COURSE_LABELS[u.course]||u.course} · Doc: ${u.docNum}</span></div>`).join(''):'<p class="text-muted" style="font-size:.85rem">Sin usuarios registrados.</p>');
+  // Recent results
+  const recentR=rs.slice(-5).reverse();
+  document.getElementById('adm-recent-results').innerHTML=`<h4 class="text-gold mb-2">Últimos Simulacros</h4>`+
+    (recentR.length?recentR.map(r=>{
+      const u=us.find(u=>u.id===r.userId);
+      const s=ss.find(s=>s.id===r.simulacroId);
+      return`<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:.85rem"><strong>${u?u.name:'Desconocido'}</strong> · <span class="badge ${scoreBadge(r.score)}">${r.score}/100</span><br><span class="text-muted">${s?s.title:'—'}</span></div>`;
+    }).join(''):'<p class="text-muted" style="font-size:.85rem">Sin resultados aún.</p>');
+  // Load perf users
+  const sel=document.getElementById('adm-perf-user');
+  sel.innerHTML='<option value="">— Selecciona un estudiante —</option>'+
+    users().map(u=>`<option value="${u.id}">${u.name} (${u.docNum})</option>`).join('');
+  loadAdminSims();
+  loadAdminVideos();
+  renderUsersTable();
+}
+
+function switchAdminTab(tab,el){
+  document.querySelectorAll('.admin-nav-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#sec-admin .tab-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('adm-tab-'+tab).classList.add('active');
+  if(tab==='users') renderUsersTable();
+  if(tab==='simulacros') loadAdminSims();
+  if(tab==='videos') loadAdminVideos();
+}
+
+function renderUsersTable(){
+  const search=(v('adm-search')||'').toLowerCase();
+  const courseFilter=v('adm-filter-course')||'';
+  let us=users();
+  if(search) us=us.filter(u=>u.name.toLowerCase().includes(search)||u.docNum.includes(search));
+  if(courseFilter) us=us.filter(u=>u.course===courseFilter);
+  const tbody=document.getElementById('adm-users-tbody');
+  if(!us.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:rgba(255,255,255,0.35);padding:30px">Sin resultados</td></tr>';return;}
+  const rs=results();
+  tbody.innerHTML=us.map(u=>{
+    const myR=rs.filter(r=>r.userId===u.id);
+    const best=myR.length?Math.max(...myR.map(r=>r.score)):null;
+    return`<tr>
+      <td><code style="color:var(--gold);font-size:.8rem">${u.docNum}</code></td>
+      <td><strong>${u.name}</strong></td>
+      <td style="font-size:.82rem">${u.email}</td>
+      <td style="font-size:.82rem">${u.phone}</td>
+      <td><span class="badge badge-info" style="font-size:.7rem">${COURSE_LABELS[u.course]||u.course}</span></td>
+      <td>${u.active?'<span class="badge badge-ok">Activo</span>':'<span class="badge badge-err">Bloqueado</span>'}</td>
+      <td>
+        <button class="btn btn-ghost btn-sm" style="font-size:.75rem" onclick="resetPass('${u.id}')">🔑 Reset</button>
+        <button class="btn ${u.active?'btn-danger':'btn-gold'} btn-sm" style="font-size:.75rem" onclick="toggleUser('${u.id}')">${u.active?'Bloquear':'Activar'}</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleUser(uid){
+  const all=users();
+  const u=all.find(u=>u.id===uid);
+  if(!u)return;
+  u.active=!u.active;
+  setUsers(all);
+  renderUsersTable();
+}
+
+function resetPass(uid){
+  openModal(`
+    <h3 class="modal-title">Restablecer Contraseña</h3>
+    <div class="form-group"><label class="form-label">Nueva Contraseña</label><input id="mp-pass" class="form-control" type="password" placeholder="Nueva contraseña"></div>
+    <div id="mp-alert"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-gold" onclick="doResetPass('${uid}')">Guardar</button>
+    </div>`);
+}
+
+function doResetPass(uid){
+  const np=v('mp-pass');
+  if(!np||np.length<6){showAlert('mp-alert','err','Mínimo 6 caracteres.');return;}
+  const all=users();
+  const u=all.find(u=>u.id===uid);
+  if(u){u.password=np;setUsers(all);}
+  closeModal();
+}
+
+function exportUsers(){
+  const us=users();
+  const rs=results();
+  const hdr='Documento,Nombre,Correo,Celular,Curso,Estado,Simulacros,Promedio\n';
+  const rows=us.map(u=>{
+    const myR=rs.filter(r=>r.userId===u.id);
+    const avg=myR.length?Math.round(myR.reduce((a,r)=>a+r.score,0)/myR.length):0;
+    return`${u.docNum},"${u.name}",${u.email},${u.phone},${COURSE_LABELS[u.course]||u.course},${u.active?'Activo':'Bloqueado'},${myR.length},${avg}`;
+  }).join('\n');
+  const blob=new Blob([hdr+rows],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='estudiantes-lombana.csv';a.click();
+}
+
+function loadAdminSims(){
+  const ss=simulacros();
+  document.getElementById('adm-sims-list').innerHTML=ss.length?ss.map(s=>{
+    const cnt=countQs(s);
+    const rs=results().filter(r=>r.simulacroId===s.id);
+    const avg=rs.length?Math.round(rs.reduce((a,r)=>a+r.score,0)/rs.length):0;
+    return`<div class="sim-card">
+      <div class="sim-card-icon">📝</div>
+      <div class="sim-card-body">
+        <div class="sim-card-title">${s.title}</div>
+        <div class="sim-card-meta">
+          <span class="badge badge-info">${COURSE_LABELS[s.course]||s.course}</span>
+          <span>${cnt} preguntas · ${Math.floor(s.timeLimit/60)} min · ${rs.length} realizados · Promedio: ${avg}/100</span>
+        </div>
+      </div>
+      <div class="sim-card-actions">
+        <span class="badge ${s.active?'badge-ok':'badge-err'}">${s.active?'Activo':'Inactivo'}</span>
+        <button class="btn btn-ghost btn-sm" onclick="toggleSim('${s.id}')">${s.active?'Desactivar':'Activar'}</button>
+      </div>
+    </div>`;
+  }).join(''):'<div class="empty-state"><div class="ei">📝</div><p>No hay simulacros cargados.</p></div>';
+}
+
+function toggleSim(id){
+  const ss=simulacros();
+  const s=ss.find(s=>s.id===id);
+  if(s){s.active=!s.active;setSimulacros(ss);}
+  loadAdminSims();
+}
+
+function openAddSimModal(){
+  openModal(`
+    <h3 class="modal-title">Agregar Simulacro</h3>
+    <p style="color:rgba(255,255,255,0.55);font-size:.9rem;margin-bottom:16px">Por ahora, para agregar simulacros con preguntas completas, pega el JSON del simulacro en el campo de abajo o contacta al desarrollador.</p>
+    <div class="form-group"><label class="form-label">Título</label><input id="ns-title" class="form-control" type="text" placeholder="Simulacro 2 - ..."></div>
+    <div class="form-group"><label class="form-label">Curso</label><select id="ns-course" class="form-control"><option value="concurso-docente">Concurso Docente</option><option value="ascenso">Ascenso</option><option value="preicfes">Pre-ICFES</option></select></div>
+    <div class="form-group"><label class="form-label">Tiempo límite (minutos)</label><input id="ns-time" class="form-control" type="number" value="100"></div>
+    <div id="ns-alert"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-gold" onclick="addBlankSim()">Crear (sin preguntas)</button>
+    </div>`);
+}
+
+function addBlankSim(){
+  const title=v('ns-title'), course=v('ns-course'), mins=parseInt(v('ns-time')||100);
+  if(!title) return showAlert('ns-alert','err','Ingresa un título.');
+  const ss=simulacros();
+  ss.push({id:'sim-'+Date.now(),title,course,timeLimit:mins*60,active:true,situations:[]});
+  setSimulacros(ss);
+  closeModal();loadAdminSims();
+}
+
+function loadAdminVideos(){
+  const vs=videos();
+  document.getElementById('adm-videos-list').innerHTML=vs.length?vs.map(v=>`
+    <div class="video-card">
+      <div class="video-thumb">▶</div>
+      <div class="video-body">
+        <div class="video-title">${v.title}</div>
+        <div class="video-desc">${COURSE_LABELS[v.course]||v.course} · <a href="${v.url}" target="_blank" style="color:var(--gold)">${v.url.substring(0,50)}...</a></div>
+      </div>
+      <button class="btn btn-danger btn-sm" style="margin:14px;flex-shrink:0" onclick="deleteVideo('${v.id}')">Eliminar</button>
+    </div>`).join(''):'<div class="empty-state"><div class="ei">🎬</div><p>No hay videos. Agrega uno.</p></div>';
+}
+
+function openAddVideoModal(){
+  openModal(`
+    <h3 class="modal-title">Agregar Video</h3>
+    <div class="form-group"><label class="form-label">Título del Video</label><input id="nv-title" class="form-control" type="text" placeholder="Clase: Funciones del Docente..."></div>
+    <div class="form-group"><label class="form-label">URL del Video (YouTube u otro)</label><input id="nv-url" class="form-control" type="url" placeholder="https://youtube.com/watch?v=..."></div>
+    <div class="form-group"><label class="form-label">Curso</label><select id="nv-course" class="form-control"><option value="all">Todos los cursos</option><option value="concurso-docente">Concurso Docente</option><option value="ascenso">Ascenso</option><option value="preicfes">Pre-ICFES</option></select></div>
+    <div class="form-group"><label class="form-label">Descripción (opcional)</label><input id="nv-desc" class="form-control" type="text" placeholder="Tema, duración, etc."></div>
+    <div id="nv-alert"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-gold" onclick="addVideo()">Agregar Video</button>
+    </div>`);
+}
+
+function addVideo(){
+  const title=v('nv-title'), url=v('nv-url'), course=v('nv-course'), desc=v('nv-desc');
+  if(!title||!url) return showAlert('nv-alert','err','Título y URL son obligatorios.');
+  const vs=videos();
+  vs.push({id:'v'+Date.now(),title,url,course,description:desc,addedAt:new Date().toISOString()});
+  setVideos(vs);
+  closeModal();loadAdminVideos();
+}
+
+function deleteVideo(id){
+  if(!confirm('¿Eliminar este video?'))return;
+  setVideos(videos().filter(v=>v.id!==id));
+  loadAdminVideos();
+}
+
+function loadAdminPerf(){
+  const uid=document.getElementById('adm-perf-user').value;
+  const el=document.getElementById('adm-perf-content');
+  if(!uid){el.innerHTML='';return;}
+  const u=users().find(u=>u.id===uid);
+  const rs=results().filter(r=>r.userId===uid);
+  if(!u){el.innerHTML='';return;}
+  if(!rs.length){
+    el.innerHTML=`<div class="alert alert-info">Este estudiante aún no ha realizado ningún simulacro.</div>`;return;
+  }
+  const ss=simulacros();
+  rs.sort((a,b)=>new Date(b.completedAt)-new Date(a.completedAt));
+  const best=Math.max(...rs.map(r=>r.score));
+  const avg=Math.round(rs.reduce((a,r)=>a+r.score,0)/rs.length);
+  let html=`<div class="card mb-3">
+    <h4 class="text-gold mb-2">👤 ${u.name} — ${COURSE_LABELS[u.course]||u.course}</h4>
+    <div class="stat-cards" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat-card"><div class="sn">${rs.length}</div><div class="sl">Simulacros</div></div>
+      <div class="stat-card"><div class="sn">${avg}</div><div class="sl">Promedio</div></div>
+      <div class="stat-card"><div class="sn">${best}</div><div class="sl">Mejor nota</div></div>
+      <div class="stat-card"><div class="sn">${getLevel(avg)}</div><div class="sl">Nivel</div></div>
+    </div>
+  </div>`;
+  html+=`<div class="card mb-3"><h4 class="text-gold mb-2">Historial Detallado</h4><div class="table-wrap"><table>
+    <thead><tr><th>Simulacro</th><th>Fecha</th><th>Nota</th><th>Correctas</th><th>Incorrectas</th><th>Sin resp.</th><th>Tiempo</th><th>Nivel</th></tr></thead>
+    <tbody>${rs.map(r=>{
+      const s=ss.find(s=>s.id===r.simulacroId);
+      const d=new Date(r.completedAt).toLocaleDateString('es-CO');
+      const tm=Math.floor(r.timeUsed/60)+'min '+r.timeUsed%60+'s';
+      return`<tr><td style="font-size:.83rem">${s?s.title:'—'}</td><td style="font-size:.82rem">${d}</td>
+        <td><span class="badge ${scoreBadge(r.score)}">${r.score}/100</span></td>
+        <td class="text-ok">${r.correct}</td><td class="text-err">${r.wrong}</td>
+        <td class="text-muted">${r.skip}</td><td style="font-size:.82rem">${tm}</td>
+        <td><span style="font-size:.82rem">${getLevel(r.score)}</span></td></tr>`;
+    }).join('')}</tbody></table></div></div>`;
+  // Weaknesses
+  const weakMap=analyzeWeaknesses(rs,ss);
+  if(weakMap.length){
+    html+=`<div class="card"><h4 class="text-gold mb-3">Análisis por Áreas</h4>`;
+    html+=weakMap.map(w=>`
+      <div class="mb-2">
+        <div class="flex justify-between mb-1">
+          <span style="font-size:.87rem">${w.label}</span>
+          <span style="font-size:.82rem;color:${w.pct>=70?'var(--gold)':'#ff8a8a'}">${w.pct}% correctas (${w.corr}/${w.total})</span>
+        </div>
+        <div class="prog-bar-wrap"><div class="prog-bar" style="width:${w.pct}%;background:${w.pct>=70?'linear-gradient(90deg,var(--gold-d),var(--gold-l))':w.pct>=50?'linear-gradient(90deg,#E8A000,#ffd45e)':'linear-gradient(90deg,#b02a37,#ff6b6b)'}"></div></div>
+      </div>`).join('');
+    html+='</div>';
+  }
+  el.innerHTML=html;
+}
+
+function analyzeWeaknesses(rs, sims){
+  const map={};
+  rs.forEach(r=>{
+    const sim=sims.find(s=>s.id===r.simulacroId);
+    if(!sim)return;
+    sim.situations.forEach(sit=>{
+      const k=sit.id;
+      if(!map[k])map[k]={label:sit.label.replace(/\s*\([^)]+\)/,'').trim(),total:0,corr:0};
+      sit.questions.forEach(q=>{
+        map[k].total++;
+        if(r.answers[q.n]===q.ans)map[k].corr++;
+      });
+    });
+  });
+  return Object.values(map).map(w=>({...w,pct:Math.round((w.corr/w.total)*100)})).sort((a,b)=>a.pct-b.pct);
+}
+
+function changeAdminPass(){
+  const np=v('cfg-newpass'), np2=v('cfg-newpass2');
+  clearAlert('cfg-alert');
+  if(!np||np.length<6) return showAlert('cfg-alert','err','Mínimo 6 caracteres.');
+  if(np!==np2) return showAlert('cfg-alert','err','Las contraseñas no coinciden.');
+  const cfg=adminCfg(); cfg.password=np; DB.set('admin',cfg);
+  showAlert('cfg-alert','ok','Contraseña actualizada correctamente.');
+  document.getElementById('cfg-newpass').value='';document.getElementById('cfg-newpass2').value='';
+}
+
+// ═══════════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════════
+function v(id){return document.getElementById(id)?.value?.trim()||''}
+function showAlert(el,type,msg){document.getElementById(el).innerHTML=`<div class="alert alert-${type}"><span>${msg}</span></div>`}
+function clearAlert(el){const e=document.getElementById(el);if(e)e.innerHTML='';}
+function openModal(html){document.getElementById('modal-content').innerHTML=html;document.getElementById('modal-overlay').classList.remove('hidden');}
+function closeModal(e){if(!e||e.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').classList.add('hidden');}
+
+function getLevel(score){
+  if(score>=85)return'Superior';
+  if(score>=70)return'Alto';
+  if(score>=50)return'Básico';
+  return'Bajo';
+}
+function getClassLevel(score){
+  if(score>=85)return'superior';
+  if(score>=70)return'alto';
+  if(score>=50)return'basico';
+  return'bajo';
+}
+function scoreBadge(score){
+  if(score>=85)return'badge-ok';
+  if(score>=70)return'badge-info';
+  if(score>=50)return'badge-gold';
+  return'badge-err';
+}
+function scoreEmoji(score){
+  if(score>=85)return'🏆';
+  if(score>=70)return'🌟';
+  if(score>=50)return'📈';
+  return'📚';
+}
+
+// ═══════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════
+(function init(){
+  const sess=session();
+  if(sess){
+    if(sess.isAdmin){loadAdminDashboard();showSec('sec-admin');}
+    else{loadDashboard();showSec('sec-dashboard');}
+  }
+})();
+</script>
+</body>
+</html>
